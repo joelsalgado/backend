@@ -26,7 +26,9 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "^2.5",
-        "yiister/yii2-gentelella": "~1.0"
+        "yiister/yii2-gentelella": "~1.0",
+        "apaoww/yii2-oci8": "dev-master",
+        "apaoww/yii2-admin-oci8": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

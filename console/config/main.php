@@ -14,6 +14,7 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@apaoww/oci8' => 'path/to/your/extracted',
     ],
     'controllerMap' => [
         'fixture' => [

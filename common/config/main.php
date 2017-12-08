@@ -3,6 +3,7 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@apaoww/AdminOci8' => 'path/to/your/extracted',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
@@ -10,7 +11,7 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager'
+            'class' => 'common\modules\rbac\Rbac'
         ],
     ],
 ];

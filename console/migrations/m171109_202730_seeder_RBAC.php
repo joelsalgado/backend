@@ -45,7 +45,7 @@ class m171109_202730_seeder_RBAC extends Migration
             }
             $this->insert("auth_assignment", [
                 "item_name" => "UserController_1",
-                "user_id" => 1,
+                "user_id" => "1",
                 "created_at" => time(),
             ]);
         }
