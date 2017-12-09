@@ -1,8 +1,5 @@
 <?php
 use yii\helpers\Html;
-
-/* @var $this \yii\web\View */
-/* @var $content string */
 ?>
 
 <header class="main-header">
@@ -32,7 +29,7 @@ use yii\helpers\Html;
                             <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
                                  alt="User Image"/>
                             <p>
-                                Joel Salgado
+                                <?= Yii::$app->user->id ?>
                             </p>
                         </li>
                         <!-- Menu Footer-->
