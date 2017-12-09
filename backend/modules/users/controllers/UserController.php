@@ -70,6 +70,7 @@ class UserController extends RbacValidationController {
     
     public function actionCreate() {
         $model = new User();
+        $this->increment();
         $this->data = Yii::$app->request->post();
         if ($model->load(Yii::$app->request->post())) {
             $password = Yii::$app->request->post()['User']["password_hash"];
@@ -127,4 +128,16 @@ class UserController extends RbacValidationController {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function increment(){
+        $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '".Yii::$app->params['sequenceUsers']."'";
+        $val = Yii::$app->db->createCommand($count)->queryOne();
+        $value = $val["COUNT(*)"];
+        if ($value <= 0) {
+            $sql = "CREATE sequence ".Yii::$app->params['sequenceUsers'];
+            $result = Yii::$app->db->createCommand($sql)->query();
+        }
+    }
+
+
 }

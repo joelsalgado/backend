@@ -4,6 +4,7 @@ namespace app\models;
 
 use common\behaviors\AuthKeyBehavior;
 use yii\behaviors\TimestampBehavior;
+use Yii;
 
 /**
  * This is the model class for table "user".
@@ -34,7 +35,7 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'email','password_hash'], 'required'],
+            [['username', 'email','password_hash'], 'required', 'message' => 'Requerido'],
             [['username', 'email'] ,'unique'],
             [['username'], 'string', 'max' => 32],
             [['email'], 'string', 'max' => 255],
@@ -49,12 +50,12 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
+            'username' => 'Usuario',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password',
+            'password_hash' => 'Contraseña',
             'password_reset_token' => 'Password Reset Token',
             'email' => 'Email',
-            'status' => 'Status',
+            'status' => 'Estado',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -71,4 +72,22 @@ class User extends \yii\db\ActiveRecord
             ]
         ];
     }
+
+    public function beforeSave($insert)
+    {
+
+        if (parent::beforeSave($insert)) {
+
+            if ($this->isNewRecord) {
+
+                $sql = "SELECT " . Yii::$app->params['sequenceUsers'] . ".NEXTVAL FROM DUAL";
+                $result = Yii::$app->db->createCommand($sql)->queryOne();
+                $this->id = $result["NEXTVAL"];
+            }
+            return true;
+        }
+
+    }
+
+
 }
