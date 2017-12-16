@@ -28,7 +28,8 @@
         "dmstr/yii2-adminlte-asset": "^2.5",
         "yiister/yii2-gentelella": "~1.0",
         "apaoww/yii2-oci8": "dev-master",
-        "apaoww/yii2-admin-oci8": "dev-master"
+        "apaoww/yii2-admin-oci8": "dev-master",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

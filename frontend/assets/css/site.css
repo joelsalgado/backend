@@ -118,3 +118,19 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.skin-green-light .main-header .navbar {
+    background-color: #9e9d24  !important;
+}
+
+.skin-green-light .main-header .logo{
+    background-color: #9e9d24  !important;
+}
+
+.skin-green-light .main-header .navbar .sidebar-toggle:hover{
+    background-color: #827717  !important;
+}
+
+.skin-green-light .main-header li.user-header {
+    background-color: #827717 !important;
+}

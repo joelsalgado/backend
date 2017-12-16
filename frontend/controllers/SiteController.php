@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Periodos;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -12,6 +13,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Programas;
 
 /**
  * Site controller
@@ -72,7 +74,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $prog = Programas::find()->where(['STATUS_1' => 'B'])->all();
+        $periodo = Periodos::find()->all();
+        //var_dump($prog); die;
+        return $this->render('index',[
+            'prog' => $prog,
+            'periodo' => $periodo
+        ]);
     }
 
     /**
