@@ -30,6 +30,12 @@ class Metadato extends \yii\db\ActiveRecord
             [['LOCALIDAD', 'LOCALIDAD_C'], 'string', 'max' => 150],
             [['AGEB', 'AGEB_C'], 'string', 'max' => 15],
             [['CORREO_ELECTRONICO', 'CORREO_ELECTRONICO_C'], 'string', 'max' => 60],
+            [['FECHA_NACIMIENTO'],'date', 'format'=>'dd/mm/yyyy', 'message' => 'Formato no valido'],
+            ['CORREO_ELECTRONICO','email', 'message' => 'Formato no valido'],
+            [['PRIMER_APELLIDO','SEGUNDO_APELLIDO', 'NOMBRES'], 'match', 'pattern' => '/^[a-záéíóúñ\s]+$/i', 'message' => 'Sólo se aceptan letras'],
+            [['CURP'], 'match', 'pattern' => '/[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]/', 'message' => 'Formato no valido'],
+            ['CURP', 'match', 'pattern' => '/^.{1,18}$/', 'message' => 'Tiene que tener 18 caracteres'],
+
         ];
     }
 
@@ -150,5 +156,23 @@ class Metadato extends \yii\db\ActiveRecord
     public function getLocalidad()
     {
         return $this->hasOne(Localidad::className(), ['CVE_LOCALIDAD' => 'CVE_LOCALIDAD']);
+    }
+
+
+    public function beforeSave($insert)
+    {
+
+        if (parent::beforeSave($insert)) {
+
+            if ($this->isNewRecord) {
+                $sql = "SELECT ".Yii::$app->params['seqMetadato'].".NEXTVAL FROM DUAL";
+                $result = Yii::$app->db->createCommand($sql)->queryOne();
+                $this->id = $result["NEXTVAL"];
+            }
+            $this->STATUS = 1;
+
+            return true;
+        }
+
     }
 }
