@@ -169,7 +169,8 @@ class MetadatoSearch extends Metadato
             ->andFilterWhere(['like', 'USU_M', $this->USU_M])
             ->andFilterWhere(['like', 'PW_M', $this->PW_M])
             ->andFilterWhere(['like', 'IP_M', $this->IP_M])
-            ->andFilterWhere(['like', 'FECHA_M', $this->FECHA_M]);
+            ->andFilterWhere(['like', 'FECHA_M', $this->FECHA_M])
+            ->limit(100);
 
         return $dataProvider;
     }

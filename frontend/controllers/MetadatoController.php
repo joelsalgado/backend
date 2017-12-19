@@ -3,17 +3,23 @@
 namespace frontend\controllers;
 
 use common\models\Agebs;
+use common\models\Cuentas;
+use common\models\Diario;
+use common\models\Docs;
 use common\models\Documentos;
 use common\models\EntidadFederativa;
 use common\models\Localidad;
 use common\models\Municipio;
 use common\models\Nacionalidades;
+use common\models\Ponderacion;
+use common\models\Status;
 use Yii;
 use common\models\Metadato;
 use common\models\MetadatoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Request;
 
 /**
  * MetadatoController implements the CRUD actions for Metadato model.
@@ -58,29 +64,147 @@ class MetadatoController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Metadato model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+
     public function actionCreate($mun)
     {
 
         $model = new Metadato();
-        $loc = Localidad::find()
-            ->where(['CVE_ENTIDAD_FEDERATIVA' => 15, 'CVE_MUNICIPIO' => $mun])
-            ->all();
+        $docs = new Docs();
+        $status = new Status();
+        $ponderacion = new Ponderacion();
+        $diario = new Diario();
+        $cuentas = new Cuentas();
 
-        $ageb = Agebs::find()->where(['MUNICIPIO_ID' => $mun])->all();
+        $loc = $this->localidades($mun);
 
-        $nac = Nacionalidades::find()->all();
+        $ageb = $this->agebs($mun);
 
-        $doc = Documentos::find()->all();
+        $nac = $this->nacionalidades();
 
-        $nacim = EntidadFederativa::find()->all();
+        $doc = $this->documentos();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->FOLIO]);
+        $nacim = $this->entidades();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $id = $this->increment();
+
+            $request = New Request;
+
+            $user = Yii::$app->user->id;
+
+            $ip = $request->getUserIp();
+
+            $periodo = Yii::$app->params['periodo'];
+
+            $programa = Yii::$app->params['programa'];
+
+            $dependencia = Yii::$app->params['dependencia'];
+
+            $folio_relacionado =  $periodo.$programa.$id;
+
+            $model->FOLIO = $id;
+
+            $model->N_PERIODO = $periodo;
+
+            $model->CVE_PROGRAMA = $programa;
+
+            $model->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $model->USU = $user.'';
+
+            $model->IP = $ip;
+
+            $model->CVE_DEPENDENCIA = $dependencia.'';
+
+            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
+
+
+            $docs->FOLIO = $id;
+
+            $docs->N_PERIODO = $periodo;
+
+            $docs->CVE_PROGRAMA = $programa;
+
+            $docs->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $docs->USU = $user.'';
+
+            $docs->IP = $ip;
+
+
+            $status->FOLIO = $id;
+
+            $status->N_PERIODO = $periodo;
+
+            $status->CVE_PROGRAMA = $programa;
+
+            $status->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $status->STATUS_P1_01 = 0;
+
+            $status->USU = $user.'';
+
+            $status->IP = $ip;
+
+
+            $ponderacion->FOLIO = $id;
+
+            $ponderacion->N_PERIODO = $periodo;
+
+            $ponderacion->CVE_PROGRAMA = $programa;
+
+            $ponderacion->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $ponderacion->USU = $user.'';
+
+            $ponderacion->P_01=0;
+
+            $ponderacion->IP = $ip;
+
+
+            $diario->FOLIO = $id;
+
+            $diario->N_PERIODO = $periodo;
+
+            $diario->CVE_PROGRAMA = $programa;
+
+            $diario->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $diario->PROCESO_ID = 2;
+
+            $diario->ACTIVIDAD_ID = 2003;
+
+            $diario->TRX_ID = 3;
+
+            $diario->USU = $user.'';
+
+            $diario->IP = $ip;
+
+            $cuentas->FOLIO = $id;
+
+            $cuentas->N_PERIODO = $periodo;
+
+            $cuentas->CVE_PROGRAMA = $programa;
+
+            $cuentas->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $cuentas->USU = $user.'';
+
+            $cuentas->IP = $ip;
+
+
+            if ($model->save() &&
+                $docs->save() &&
+                $status->save() &&
+                $ponderacion->save() &&
+                $diario->save() &&
+                $cuentas->save()){
+                return $this->redirect(['view', 'id' => $model->FOLIO]);
+            }
+            else{
+                throw new \yii\web\NotFoundHttpException;
+            }
         }
 
         return $this->render('create', [
@@ -94,22 +218,48 @@ class MetadatoController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Metadato model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
+
+    public function actionUpdate($id,$mun)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->FOLIO]);
+        $loc = $this->localidades($mun);
+
+        $ageb = $this->agebs($mun);
+
+        $nac = $this->nacionalidades();
+
+        $doc = $this->documentos();
+
+        $nacim = $this->entidades();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $request = New Request;
+
+            $user = Yii::$app->user->id;
+
+            $ip = $request->getUserIp();
+
+            $model->USU = $user.'';
+
+            $model->IP = $ip;
+
+            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
+
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->FOLIO]);
+            }
+
         }
 
         return $this->render('update', [
             'model' => $model,
+            'loc' => $loc,
+            'ageb' => $ageb,
+            'nac' => $nac,
+            'doc' => $doc,
+            'nacim' => $nacim,
+            'mun' => $mun
         ]);
     }
 
@@ -128,14 +278,83 @@ class MetadatoController extends Controller
 
     public function actionMunicipio()
     {
-        $model = Municipio::find()
+        $cacheName = 'Municipios';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $model = Municipio::find()
                 ->where(['ENTIDADFEDERATIVAID' => 15])
                 ->orderBy(['MUNICIPIONOMBRE' => 'DESC'])
                 ->all();
+            Yii::$app->cache->set($cacheName, $model);
+        }
 
-        return $this->render('municipio', [
-            'model' => $model,
-        ]);
+        if(Yii::$app->cache->get($cacheName)) {
+
+            return $this->render('municipio', [
+                'model' => Yii::$app->cache->get($cacheName),
+            ]);
+        }
+        else{
+            throw new \yii\web\NotFoundHttpException;
+        }
+    }
+
+    protected function agebs($mun){
+        $cacheName = 'Agebs'.$mun;
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $ageb =Agebs::find()->where(['MUNICIPIO_ID' => $mun])->all();
+            Yii::$app->cache->set($cacheName,$ageb);
+        }
+
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
+
+    protected function localidades($mun){
+        $cacheName = 'Localidades'.$mun;
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $loc = Localidad::find()
+                ->where(['CVE_ENTIDAD_FEDERATIVA' => 15, 'CVE_MUNICIPIO' => $mun])
+                ->all();
+            Yii::$app->cache->set($cacheName,$loc);
+        }
+
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
+
+    protected function nacionalidades(){
+        $cacheName = 'Nacionalidades';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $nac = Nacionalidades::find()->all();
+            Yii::$app->cache->set($cacheName,$nac);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
+
+    protected function documentos(){
+        $cacheName = 'Documentos';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $doc = Documentos::find()->all();
+            Yii::$app->cache->set($cacheName,$doc);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
+
+    protected function entidades(){
+        $cacheName = 'Entidades';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $ent = EntidadFederativa::find()->all();
+            Yii::$app->cache->set($cacheName,$ent);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
     }
 
     protected function findModel($id)
@@ -145,6 +364,19 @@ class MetadatoController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function increment(){
+        $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '".Yii::$app->params['seqMetadato']."'";
+        $val = Yii::$app->db->createCommand($count)->queryOne();
+        $value = $val["COUNT(*)"];
+        if ($value <= 0) {
+            $sql = "CREATE sequence ".Yii::$app->params['seqMetadato'];
+            //$result = Yii::$app->db->createCommand($sql)->query();
+        }
+        $sql2 = "SELECT ".Yii::$app->params['seqMetadato'].".NEXTVAL FROM DUAL";
+        $resultado = Yii::$app->db->createCommand($sql2)->queryOne();
+        return $resultado["NEXTVAL"];
     }
 
 }

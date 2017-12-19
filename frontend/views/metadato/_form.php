@@ -75,12 +75,6 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="form-group">
-                <?= $form->field($model, 'COLONIA')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-
         <div class="col-sm-2">
             <div class="form-group">
                 <?= $form->field($model, 'NUM_EXT')->textInput(['maxlength' => true]) ?>
@@ -93,13 +87,32 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
+        <div class="col-sm-8">
+            <div class="form-group">
+                <?= $form->field($model, 'COLONIA')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+
+
         <div class="col-sm-2">
             <div class="form-group">
                 <?= $form->field($model, 'CODIGO_POSTAL')->textInput() ?>
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <?= $form->field($model, 'ENTRE_CALLE')->textInput() ?>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                <?= $form->field($model, 'Y_CALLE')->textInput() ?>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
             <div class="form-group">
                 <?= $form->field($model, 'OTRA_REFERENCIA')->textInput(['maxlength' => true]) ?>
             </div>
@@ -110,15 +123,15 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="row">
         <div class="col-sm-4">
+            <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-4">
             <div class="form-group">
                 <?= $form->field($model, 'PRIMER_APELLIDO')->textInput(['maxlength' => true, 'style'=>'text-transform:uppercase;']) ?>
             </div>
         </div>
         <div class="col-sm-4">
             <?= $form->field($model, 'SEGUNDO_APELLIDO')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-2">
             <?= $form->field($model, 'SEXO')->radioList(['H' => 'Hombre', 'M' => 'Mujer']) ?>
@@ -190,7 +203,7 @@ use yii\helpers\ArrayHelper;
 </div>
 <div class="metadato-form">
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

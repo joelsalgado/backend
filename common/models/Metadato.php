@@ -15,7 +15,7 @@ class Metadato extends \yii\db\ActiveRecord
     {
         return [
             [['N_PERIODO', 'CVE_PROGRAMA', 'NUMERO_HIJOS', 'TP_ID_OFICIAL', 'CVE_ESTADO_CIVIL', 'CVE_GRADO_ESTUDIOS', 'CVE_PARENTESCO', 'CVE_NACIONALIDAD', 'CVE_LUGAR_NACIMIENTO', 'CVE_ACTIVIDAD_LABORAL', 'CVE_SITUACION_LABORAL', 'SECCION', 'CVE_LOCALIDAD', 'CVE_MUNICIPIO', 'CVE_ENTIDAD_FEDERATIVA', 'CVE_REGION', 'LATITUD', 'LONGITUD', 'TP_ID_OFICIAL_C', 'CVE_ESTADO_CIVIL_C', 'CVE_GRADO_ESTUDIOS_C', 'CVE_PARENTESCO_C', 'CVE_NACIONALIDAD_C', 'CVE_LUGAR_NACIMIENTO_C', 'CVE_ACTIVIDAD_LABORAL_C', 'CVE_SITUACION_LABORAL_C', 'SECCION_C', 'CVE_MUNICIPIO_C', 'CVE_ENTIDAD_FEDERATIVA_C', 'CVE_REGION_C', 'LATITUD_C', 'LONGITUD_C'], 'number'],
-            [['FOLIO', 'PRIMER_APELLIDO'], 'required'],
+            [['FOLIO', 'PRIMER_APELLIDO', 'NOMBRES', 'SEXO', 'FECHA_NACIMIENTO', 'CVE_NACIONALIDAD', 'CURP', 'TELEFONO', 'CVE_LUGAR_NACIMIENTO', 'CODIGO_POSTAL', 'OTRA_REFERENCIA', 'CVE_LOCALIDAD', 'AGEB', 'CALLE', 'COLONIA' ], 'required', 'message' => 'Campo Obligatorio'],
             [['FOLIO', 'CODIGO_POSTAL', 'CODIGO_POSTAL_C', 'CVE_LOCALIDAD_C', 'NUMERO_HIJOS_C'], 'integer'],
             [['FECHA_NACIMIENTO', 'FECHA_NACIMIENTO_C', 'FECHA_REG', 'FECHA_M'], 'string'],
             [['FOLIO_RELACIONADO'], 'string', 'max' => 16],
@@ -74,8 +74,8 @@ class Metadato extends \yii\db\ActiveRecord
             'LOTE' => 'Lote',
             'CODIGO_POSTAL' => 'Código Postal',
             'SECCION' => 'Seccion',
-            'ENTRE_CALLE' => 'Entre  Calle',
-            'Y_CALLE' => 'Y  Calle',
+            'ENTRE_CALLE' => 'Entre  la Calle',
+            'Y_CALLE' => 'Y  la Calle',
             'OTRA_REFERENCIA' => 'Rasgo Fisico que ayude a ubicar la vivienda',
             'LADA_TELEFONO' => 'Lada  Telefono',
             'TELEFONO' => 'Teléfono fijo (con lada)',
@@ -165,11 +165,9 @@ class Metadato extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
 
             if ($this->isNewRecord) {
-                $sql = "SELECT ".Yii::$app->params['seqMetadato'].".NEXTVAL FROM DUAL";
-                $result = Yii::$app->db->createCommand($sql)->queryOne();
-                $this->id = $result["NEXTVAL"];
+                $this->STATUS_1 = 1;
             }
-            $this->STATUS = 1;
+
 
             return true;
         }
