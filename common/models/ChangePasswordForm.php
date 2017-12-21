@@ -7,9 +7,7 @@ use yii\base\InvalidParamException;
 use common\models\User;
 use common\helpers\EncodeData;
 
-/**
- * Password reset form
- */
+
 class ChangePasswordForm extends Model
 {
     public $oldPassword;

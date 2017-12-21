@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Periodos;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -12,6 +13,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Programas;
 
 /**
  * Site controller
