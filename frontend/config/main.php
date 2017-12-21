@@ -12,6 +12,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' =>[
+        'api' => [
+            'class' => 'frontend\modules\api\Api',
+        ]
+    ],
     'components' => [
         'view' => [
             'theme' => [
