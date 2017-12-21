@@ -158,6 +158,20 @@ class Metadato extends \yii\db\ActiveRecord
         return $this->hasOne(Localidad::className(), ['CVE_LOCALIDAD' => 'CVE_LOCALIDAD']);
     }
 
+    public function getNacionalidad()
+    {
+        return $this->hasOne(Nacionalidades::className(), ['CVE_NACIONALIDAD' => 'CVE_NACIONALIDAD']);
+    }
+
+    public function getDocumento()
+    {
+        return $this->hasOne(Documentos::className(), ['CVE_DOCUMENTO' => 'TP_ID_OFICIAL']);
+    }
+    public function getNacimiento()
+    {
+        return $this->hasOne(EntidadFederativa::className(), ['CVE_ENTIDAD_FEDERATIVA' => 'CVE_LUGAR_NACIMIENTO']);
+    }
+
 
     public function beforeSave($insert)
     {

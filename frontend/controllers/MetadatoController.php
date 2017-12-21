@@ -13,6 +13,8 @@ use common\models\Municipio;
 use common\models\Nacionalidades;
 use common\models\Ponderacion;
 use common\models\Status;
+use kartik\mpdf\Pdf;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 use Yii;
 use common\models\Metadato;
 use common\models\MetadatoSearch;
@@ -263,12 +265,34 @@ class MetadatoController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Metadato model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
+
+    public function actionReport($id) {
+        $model = Metadato::findOne($id);
+
+        $generator = new BarcodeGeneratorPNG();
+        $code =  base64_encode($generator->getBarcode($model->FOLIO_RELACIONADO, $generator::TYPE_CODE_128_B));
+
+        $content = $this->renderPartial('_reportView', [
+            'model'=> $model,
+            'code' => $code
+        ]);
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
+            'format' => Pdf::FORMAT_A4,
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $content,
+            'options' => [
+                'title' => 'FUR'
+            ],
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            'methods' => [
+                'SetHeader' => ['Secretaria de Desarrollo Social'],
+                'SetFooter' => ['|Pagina {PAGENO}|'],
+            ]
+        ]);
+        return $pdf->render();
+    }
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();

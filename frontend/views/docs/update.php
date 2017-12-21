@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Update';
 <div class="docs-update">
     <div class="box">
         <ul class="nav nav-tabs">
-            <li><a href="/metadato/update?id=<?=$model->FOLIO?>&mun=<?= $mun ?>">Datos Personales</a></li>
+            <li><?= Html::a('Datos Personales', ['metadato/update','id' => $model->FOLIO, 'mun' => $mun]) ?></li>
             <li class="active"><a href="#">Documentos</a></li>
 
         </ul>

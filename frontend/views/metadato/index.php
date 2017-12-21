@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\MetadatoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Metadatos';
+$this->title = 'Solicitantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="metadato-index">
@@ -17,12 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Metadato', ['municipio'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nuevo Solicitante', ['municipio'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary' => "Mostrando {begin}-{end} de {totalCount} elementos",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -135,7 +136,37 @@ $this->params['breadcrumbs'][] = $this->title;
             //'IP_M',
             //'FECHA_M',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Acciones',
+                'headerOptions' => ['style' => 'color:#337ab7'],
+                'template' => '{update}{report}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-update'),
+                        ]);
+                    },
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-print"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-report'),
+                        ]);
+                    }
+
+
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'update') {
+                        $url ='update?id='.$model->FOLIO.'&mun='.$model->CVE_MUNICIPIO;
+                        return $url;
+                    }
+                    if ($action === 'report') {
+                        $url ='report?id='.$model->FOLIO;
+                        return $url;
+                    }
+                }
+            ],
+
         ],
     ]); ?>
     <?php Pjax::end(); ?>

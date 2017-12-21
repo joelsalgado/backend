@@ -16,7 +16,7 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'imageTemp')->widget(FileInput::classname(), [
         'pluginOptions' => [
             'initialPreview'=>[
-                "/images/ACTA/".$model->DOCTO_1,
+                Yii::$app->homeUrl."images/ACTA/".$model->DOCTO_1,
             ],
             'initialPreviewAsData'=>true,
             'showCaption' => true,
@@ -24,7 +24,7 @@ use kartik\file\FileInput;
             'showUpload' => false,
             'browseClass' => 'btn btn-primary btn-block',
             'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-            'maxFileSize'=>Yii::$app->params['sizeImg'],
+            //'maxFileSize'=>Yii::$app->params['sizeImg'],
             'browseLabel' =>  ''
         ],
         'options' => ['accept' => 'image/*'],
@@ -33,7 +33,7 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'imageTemp2')->widget(FileInput::classname(), [
         'pluginOptions' => [
             'initialPreview'=>[
-                "/images/CURP/".$model->DOCTO_2,
+                Yii::$app->homeUrl."images/CURP/".$model->DOCTO_2,
             ],
             'initialPreviewAsData'=>true,
             'showCaption' => true,
@@ -41,7 +41,7 @@ use kartik\file\FileInput;
             'showUpload' => false,
             'browseClass' => 'btn btn-primary btn-block',
             'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-            'maxFileSize'=>Yii::$app->params['sizeImg'],
+            //'maxFileSize'=>Yii::$app->params['sizeImg'],
             'browseLabel' =>  ''
         ],
         'options' => ['accept' => 'image/*'],

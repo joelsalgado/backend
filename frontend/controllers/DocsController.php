@@ -133,10 +133,13 @@ class DocsController extends Controller
     public function loadImage($field, $type, $model, $tipo) {
         $imageFile= UploadedFile::getInstanceByName('Docs['.$type.']');
         $modelNamePhoto = $model->$field;
+        //var_dump($modelNamePhoto); die;
         if ($imageFile) {
             $sanitizeName = str_replace(' ', '_', $model->FOLIO_RELACIONADO);
-            $name = $modelNamePhoto  ??
-                $sanitizeName.'_'.$tipo.'.'.$imageFile->getExtension();
+            $name =
+                $sanitizeName.'-'.$tipo.'.'.$imageFile->getExtension();
+
+
             $model->saveImage($imageFile, $name, $type, $tipo);
             return $name;
         } else {

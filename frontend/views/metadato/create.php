@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Metadato */
 
-$this->title = 'Create Metadato';
-$this->params['breadcrumbs'][] = ['label' => 'Metadatos', 'url' => ['index']];
+$this->title = 'Crear Solicitante';
+$this->params['breadcrumbs'][] = ['label' => 'Solicitantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="metadato-create">

@@ -14,8 +14,7 @@ $this->params['breadcrumbs'][] = 'Actualizar';
     <div class="box">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">Datos Personales</a></li>
-            <li><a href="/docs/update?id=<?=$model->FOLIO?>">Documentos</a></li>
-
+            <li><?= Html::a('Documentos', ['docs/update','id' => $model->FOLIO]) ?></li>
         </ul>
         <div class="box-header with-border">
             <h3 class="box-title">Datos Personales</h3>

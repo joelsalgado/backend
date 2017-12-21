@@ -67,8 +67,8 @@ class Docs extends \yii\db\ActiveRecord
             [
                 ['imageTemp', 'imageTemp2'],
                 'image',
-                'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
-                'mimeTypes' => ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
+                'extensions' => ['jpg'],
+                'mimeTypes' => ['image/jpeg',],
             ],
         ];
     }
@@ -116,11 +116,11 @@ class Docs extends \yii\db\ActiveRecord
         $image = Image::getImagine()->open($imageFile->tempName);
 
         if ($type == 'imageTemp' || $type == 'imageTemp2' ) {
-            FileHelper::createDirectory(Yii::getAlias('@images').'/'.$tipo.'/');
+            FileHelper::createDirectory(Yii::getAlias('@images').'/'.$tipo);
 
-            $cropSizeThumb = new Box(180, 140);
+            $cropSizeThumb = new Box(600, 400);
             $image->resize($cropSizeThumb)
-                ->save(Yii::getAlias('@images').'/'.$tipo.'/'.$name, ['quality' => 100]);
+                ->save(Yii::getAlias('@images').'/'.$tipo.'/'.$name, ['quality' => 70]);
         }
     }
 }

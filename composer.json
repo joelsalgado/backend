@@ -31,7 +31,9 @@
         "apaoww/yii2-admin-oci8": "dev-master",
         "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "yiisoft/yii2-imagine": "*"
+        "yiisoft/yii2-imagine": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "picqer/php-barcode-generator": "^0.2.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

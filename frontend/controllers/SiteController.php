@@ -74,13 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $prog = Programas::find()->where(['STATUS_1' => 'B'])->all();
-        $periodo = Periodos::find()->all();
-        //var_dump($prog); die;
-        return $this->render('index',[
-            'prog' => $prog,
-            'periodo' => $periodo
-        ]);
+        return $this->render('index');
     }
 
     /**
