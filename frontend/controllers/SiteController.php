@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Periodos;
+use common\models\Usuarios;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -118,6 +119,46 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+
+
+
+
+        for ($a=1; $a <= 8800 ; $a++) {
+            $length = 3;
+            $length2 = 2;
+            $characters = 'abcdefghijklmnopqrstuvwxyz';
+            $characters2 = '1234567890';
+            $charactersLength = strlen($characters);
+            $charactersLength2 = strlen($characters2);
+            $randomString = '';
+            $randomString2 = '';
+
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+
+            }
+
+            for ($o = 0; $o < $length2; $o++) {
+                $randomString2 .= $characters2[rand(0, $charactersLength2 - 1)];
+            }
+
+            echo $randomString . $randomString2 . "<br>";
+
+        }
+        die;
+
+        for ($i=1; $i <= 8800 ; $i++) {
+            $id = $i;
+
+
+
+            echo $id."<br>";
+        }
+        die;
+
+        $usuario = new Usuarios();
+
+
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {

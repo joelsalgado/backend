@@ -20,9 +20,7 @@ class m171216_023223_create_table_doc_oficiliales extends Migration
         ]);
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function safeDown()
     {
         echo "m171216_023223_create_table_doc_oficiliales cannot be reverted.\n";

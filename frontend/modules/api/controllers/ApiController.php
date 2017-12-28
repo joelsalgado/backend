@@ -24,6 +24,7 @@ class ApiController extends ActiveController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'applicants' => ['get'],
+                    'create' => ['post'],
                 ],
             ],
         ]);
@@ -38,7 +39,18 @@ class ApiController extends ActiveController
     
 
     public function actionMetadato(){
-       $user = Metadato::find()->all();
+        $user = Metadato::find()->all();
+        if (!is_null($user)) {
+            return array('status' => true, 'data'=> $user);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
+
+    public function actionCreate(){
+        $data = Yii::$app->request->post();
+
+        var_dump($data); die;
         if (!is_null($user)) {
             return array('status' => true, 'data'=> $user);
         } else {

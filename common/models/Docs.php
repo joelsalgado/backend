@@ -118,7 +118,7 @@ class Docs extends \yii\db\ActiveRecord
         if ($type == 'imageTemp' || $type == 'imageTemp2' ) {
             FileHelper::createDirectory(Yii::getAlias('@images').'/'.$tipo);
 
-            $cropSizeThumb = new Box(600, 400);
+            $cropSizeThumb = new Box(360, 640);
             $image->resize($cropSizeThumb)
                 ->save(Yii::getAlias('@images').'/'.$tipo.'/'.$name, ['quality' => 70]);
         }
