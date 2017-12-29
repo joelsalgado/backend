@@ -325,8 +325,14 @@ class MetadatoController extends Controller
     protected function agebs($mun){
         $cacheName = 'Agebs'.$mun;
         if (Yii::$app->cache->get($cacheName) === false) {
-            $ageb =Agebs::find()->where(['MUNICIPIO_ID' => $mun])->all();
-            Yii::$app->cache->set($cacheName,$ageb);
+            $ageb = Agebs::find()->where(['MUNICIPIO_ID' => $mun, 'ENTIDAD_ID' => 15])->all();
+            if($ageb){
+                Yii::$app->cache->set($cacheName,$ageb);
+            }
+            else{
+                throw new \yii\web\NotFoundHttpException;
+            }
+
         }
 
         if(Yii::$app->cache->get($cacheName)) {

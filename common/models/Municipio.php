@@ -71,4 +71,21 @@ class Municipio extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CATENTIDADFEDERATIVA::className(), ['CVE_ENTIDAD_FEDERATIVA' => '1']);
     }
+
+    public static function edomex(){
+        $cacheName = 'MunicipiosCsche';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $municipios = Municipio::find()
+                ->select(['MUNICIPIOID', 'MUNICIPIONOMBRE'])
+                ->where(['ENTIDADFEDERATIVAID' => 15])
+                ->orderBy(['MUNICIPIONOMBRE' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $municipios);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
 }
