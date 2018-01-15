@@ -32,4 +32,17 @@ class Parentesco extends \yii\db\ActiveRecord
             'SEPUBLICA' => 'Sepublica',
         ];
     }
+
+    public static function cacheParentesco(){
+        $cacheName = 'Parentesco';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $parentesco = Parentesco::find()
+                ->orderBy(['CVE_PARENTESCO' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName,$parentesco);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
 }

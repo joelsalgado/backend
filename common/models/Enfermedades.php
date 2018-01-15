@@ -45,4 +45,17 @@ class Enfermedades extends \yii\db\ActiveRecord
             'STATUS_1' => 'Status 1',
         ];
     }
+
+    public  static function cacheEnfermedad(){
+        $cacheName = 'Enfermedad';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $enfermedad = Enfermedades::find()
+                ->orderBy(['CVE_ENFERMEDAD' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName,$enfermedad);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
 }

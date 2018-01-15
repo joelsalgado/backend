@@ -1,0 +1,147 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+
+/* @var $this yii\web\View */
+/* @var $model common\models\Socioeconomico */
+
+$this->title = $model->FOLIO;
+$this->params['breadcrumbs'][] = ['label' => 'Socioeconomicos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="socioeconomico-view">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->FOLIO], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->FOLIO], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'N_PERIODO',
+            'CVE_PROGRAMA',
+            'FOLIO',
+            'FOLIO_RELACIONADO',
+            'ES_JEFA',
+            'CVE_PARENTESCO',
+            'INDIGENA',
+            'HABLA_LENGUA_I',
+            'CVE_LENGUA',
+            'CVE_CANT',
+            'REPATRIADO',
+            'CVE_TIEMPO_RADICAR',
+            'ES_VICTIMA',
+            'DELITO_CUAL',
+            'CVE_ENFERMEDAD',
+            'EMBARAZADA',
+            'EMBARAZADA_MESES',
+            'CVE_DISCAPACIDAD',
+            'CVE_INST_SALUD',
+            'CVE_ORFANDAD',
+            'CVE_GRADO_ESTUDIOS',
+            'DESC_CCT',
+            'TIPO_ZONA',
+            'TRABAJA',
+            'CVE_TIPO_EMPLEO',
+            'CVE_ACTIVIDAD_LABORAL',
+            'CVE_SALARIO',
+            'ALGUN_INGRESO',
+            'ALGUN_INGRESO_TIPO',
+            'ALGUN_INGRESO_MONTO',
+            'ALQUILER_TERRENO',
+            'ALQUILER_TERRENO_MONTO',
+            'PENSION',
+            'PENSION_MONTO',
+            'CVE_SALARIO2',
+            'CVE_DEPEN_ECONOM',
+            'CVE_PARENTESCO2',
+            'RECIBE_APOYO',
+            'CUANTOS_APOYOS',
+            'CUAL_APOYO',
+            'CVE_CANT2',
+            'TIPO_ZONA2',
+            'CVE_ACTIVIDAD',
+            'CVE_REALIZA_ACTIVIDAD',
+            'ACTIVIDAD_FUE',
+            'CVE_SALARIO3',
+            'TIPO_ZONA3',
+            'TRABAJA2',
+            'CVE_SALARIO4',
+            'ESTUDIA',
+            'RECIBE_INGRESO',
+            'CVE_SALARIO5',
+            'BECA',
+            'CVE_PER_INGRESO',
+            'MONTO_BECA',
+            'MONTO_TRANSPORTE',
+            'CVE_TIEMPO',
+            'CVE_CANT3',
+            'COMPARTEN_GASTOS',
+            'ADULTO_SINCOMIDA',
+            'ADULTO_SINTIOHAMBRE',
+            'MENOR_PVA',
+            'ADULTO_COMIO',
+            'ADULTO_PVA',
+            'LIMOSNA',
+            'ADULTO_SINCENAR',
+            'MENOR_COMIO',
+            'ADULTO_COMIOMENOS',
+            'MENOR_COMIOMENOS',
+            'MENOR_SINTIOHAMBRE',
+            'MENOR_MENOSCOMIDA',
+            'MENOR_ACOSTARHAMBRE',
+            'CVE_CASADONDEVIVE_ES',
+            'CVE_MATERIAL',
+            'CVE_MATERIAL2',
+            'CVE_MATERIAL3',
+            'CUARTOS',
+            'CUARTOS_DORMIR',
+            'CVE_SERVICIO_AGUA',
+            'EXCUSADO',
+            'SANITARIO',
+            'CVE_SERVICIO_SANDREN',
+            'CVE_SERVICIO_SANDREN2',
+            'CVE_SERVICIO_SANDREN3',
+            'CVE_SERVICIO_LUZ',
+            'CVE_COMBUSTIBLE',
+            'FOGON',
+            'LAVADERO',
+            'TARJA',
+            'REGADERA',
+            'TINACO',
+            'CISTERNA',
+            'PILETA',
+            'CALENTADOR_SOLAR',
+            'CALENTADOR_GAS',
+            'MEDIDOR_LUZ',
+            'BOMBA_AGUA',
+            'TANQUE_GAS',
+            'AIRE_ACOND',
+            'CALEFACCION',
+            'CVE_CANT4',
+            'CVE_CASADONDEVIVE_ES2',
+            'AFECTADA',
+            'STATUS_1',
+            'STATUS_2',
+            'FECHA_REG',
+            'USU',
+            'PW',
+            'IP',
+            'FECHA_M',
+            'USU_M',
+            'PW_M',
+            'IP_M',
+        ],
+    ]) ?>
+
+</div>

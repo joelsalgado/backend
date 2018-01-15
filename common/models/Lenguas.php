@@ -47,4 +47,17 @@ class Lenguas extends \yii\db\ActiveRecord
             'SEPUBLICA' => 'Sepublica',
         ];
     }
+
+    public static function cacheLengua(){
+        $cacheName = 'Lengua';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $lengua = Lenguas::find()
+                ->orderBy(['CVE_LENGUA' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName,$lengua);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return  Yii::$app->cache->get($cacheName);
+        }
+    }
 }

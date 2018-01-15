@@ -42,4 +42,20 @@ class GradoEstudio extends \yii\db\ActiveRecord
             'GRADO_ESTUDIOS' => 'Grado  Estudios',
         ];
     }
+
+    public static function cacheGrado(){
+        $cacheName = 'GradoCsche';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $grado = GradoEstudio::find()
+                ->select(['CVE_GRADO_ESTUDIOS', 'GRADO_ESTUDIOS'])
+                ->orderBy(['CVE_GRADO_ESTUDIOS' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $grado);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
 }

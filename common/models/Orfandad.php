@@ -5,20 +5,20 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "CAT_DISCAPACIDAD".
+ * This is the model class for table "{{%CAT_ORFANDAD}}".
  *
- * @property int $CVE_DISCAPACIDAD
- * @property string $DESC_DISCAPACIDAD
+ * @property int $CVE_ORFANDAD
+ * @property string $DESC_ORFANDAD
  * @property string $STATUS_1
  */
-class Discapacidad extends \yii\db\ActiveRecord
+class Orfandad extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'CAT_DISCAPACIDAD';
+        return '{{%CAT_ORFANDAD}}';
     }
 
     /**
@@ -27,9 +27,9 @@ class Discapacidad extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['CVE_DISCAPACIDAD'], 'required'],
-            [['CVE_DISCAPACIDAD'], 'integer'],
-            [['DESC_DISCAPACIDAD'], 'string', 'max' => 30],
+            [['CVE_ORFANDAD'], 'required'],
+            [['CVE_ORFANDAD'], 'integer'],
+            [['DESC_ORFANDAD'], 'string', 'max' => 50],
             [['STATUS_1'], 'string', 'max' => 1],
         ];
     }
@@ -40,21 +40,21 @@ class Discapacidad extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CVE_DISCAPACIDAD' => 'Cve  Discapacidad',
-            'DESC_DISCAPACIDAD' => 'Desc  Discapacidad',
+            'CVE_ORFANDAD' => 'Cve  Orfandad',
+            'DESC_ORFANDAD' => 'Desc  Orfandad',
             'STATUS_1' => 'Status 1',
         ];
     }
 
-    public static function cacheDisc(){
-        $cacheName = 'DiscapacidadCsche';
+    public static function cacheOrfandad(){
+        $cacheName = 'OrfandadCsche';
         if (Yii::$app->cache->get($cacheName) === false) {
-            $municipios = Discapacidad::find()
-                ->select(['CVE_DISCAPACIDAD', 'DESC_DISCAPACIDAD'])
+            $orfandad = Orfandad::find()
+                ->select(['CVE_ORFANDAD', 'DESC_ORFANDAD'])
                 ->where(['STATUS_1' => 'A'])
-                ->orderBy(['CVE_DISCAPACIDAD' => 'DESC'])
+                ->orderBy(['CVE_ORFANDAD' => 'DESC'])
                 ->all();
-            Yii::$app->cache->set($cacheName, $municipios);
+            Yii::$app->cache->set($cacheName, $orfandad);
         }
         if(Yii::$app->cache->get($cacheName)) {
             return Yii::$app->cache->get($cacheName);
@@ -62,5 +62,4 @@ class Discapacidad extends \yii\db\ActiveRecord
             return new NotFoundHttpException();
         }
     }
-
 }

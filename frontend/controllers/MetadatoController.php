@@ -12,6 +12,7 @@ use common\models\Localidad;
 use common\models\Municipio;
 use common\models\Nacionalidades;
 use common\models\Ponderacion;
+use common\models\Socioeconomico;
 use common\models\Status;
 use kartik\mpdf\Pdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
@@ -76,6 +77,7 @@ class MetadatoController extends Controller
         $ponderacion = new Ponderacion();
         $diario = new Diario();
         $cuentas = new Cuentas();
+        $socioeconomico = new Socioeconomico();
 
         $loc = $this->localidades($mun);
 
@@ -120,6 +122,19 @@ class MetadatoController extends Controller
             $model->CVE_DEPENDENCIA = $dependencia.'';
 
             $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
+
+
+            $socioeconomico->FOLIO = $id;
+
+            $socioeconomico->N_PERIODO = $periodo;
+
+            $socioeconomico->CVE_PROGRAMA = $programa;
+
+            $socioeconomico->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $socioeconomico->USU = $user.'';
+
+            $socioeconomico->IP = $ip;
 
 
             $docs->FOLIO = $id;
@@ -197,12 +212,13 @@ class MetadatoController extends Controller
 
 
             if ($model->save() &&
+                $socioeconomico->save() &&
                 $docs->save() &&
                 $status->save() &&
                 $ponderacion->save() &&
                 $diario->save() &&
                 $cuentas->save()){
-                return $this->redirect(['view', 'id' => $model->FOLIO]);
+                return $this->redirect(['socioeconomico/update', 'id' => $model->FOLIO]);
             }
             else{
                 throw new \yii\web\NotFoundHttpException;

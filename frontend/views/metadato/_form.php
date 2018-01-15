@@ -150,6 +150,7 @@ use yii\helpers\ArrayHelper;
         <div class="col-sm-4">
             <?= $form->field($model, 'CVE_NACIONALIDAD')->widget(Select2::classname(), [
                 'data' => ArrayHelper::map($nac, 'CVE_NACIONALIDAD', 'DESC_NACIONALIDAD'),
+                'value' => 2,
                 'options' => ['placeholder' => 'Selecciona una Nacionalidad'],
                 'pluginOptions' => [
                     'allowClear' => true
@@ -207,7 +208,6 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
 
 
