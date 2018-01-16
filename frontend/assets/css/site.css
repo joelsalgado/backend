@@ -134,3 +134,10 @@ a.desc:after {
 .skin-green-light .main-header li.user-header {
     background-color: #827717 !important;
 }
+
+
+.alert-success-alt {
+    color: #f9fbe7 ;
+    background-color: #9e9d24;
+    border-color: #cab652;
+}

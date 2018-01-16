@@ -13,12 +13,13 @@ use kartik\select2\Select2;
 <div class="container">
 
     <?php $form = ActiveForm::begin(); ?>
-    <div class="alert alert-danger">
-        <strong>Datos Socioeconómicos del Solicitante</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">Datos Socioeconómicos del Solicitante</font></strong>
+        <span class="glyphicon glyphicon-duplicate"></span>
     </div>
 
     <?= $form->field($model, 'ES_JEFA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="JEFA">
     <?= $form->field($model, 'CVE_PARENTESCO')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($parentesco, 'CVE_PARENTESCO', 'DESC_PARENTESCO'),
         'options' => ['placeholder' => 'Selecciona un Parentesco'],
@@ -26,11 +27,12 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]) ?>
+    </div>
 
     <?= $form->field($model, 'INDIGENA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
 
     <?= $form->field($model, 'HABLA_LENGUA_I')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="LENGUA">
     <?= $form->field($model, 'CVE_LENGUA')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($lengua, 'CVE_LENGUA', 'DESC_LENGUA'),
         'options' => ['placeholder' => 'Selecciona una Lengua'],
@@ -38,6 +40,7 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]) ?>
+    </div>
 
     <?= $form->field($model, 'CVE_CANT')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($cantidades, 'CVE_CANT', 'DESC_CANT'),
@@ -58,8 +61,9 @@ use kartik\select2\Select2;
     ]) ?>
 
     <?= $form->field($model, 'ES_VICTIMA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
-    <?= $form->field($model, 'DELITO_CUAL')->textInput(['maxlength' => true]) ?>
+    <div class="DELITO">
+        <?= $form->field($model, 'DELITO_CUAL')->textInput(['maxlength' => true]) ?>
+    </div>
 
     <?= $form->field($model, 'CVE_ENFERMEDAD')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($enfermedad, 'CVE_ENFERMEDAD', 'DESC_ENFERMEDAD'),
@@ -70,8 +74,9 @@ use kartik\select2\Select2;
     ]) ?>
 
     <?= $form->field($model, 'EMBARAZADA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="EMBARAZADA">
     <?= $form->field($model, 'EMBARAZADA_MESES')->textInput() ?>
+    </div>
 
     <?= $form->field($model, 'CVE_DISCAPACIDAD')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($discapacidad, 'CVE_DISCAPACIDAD', 'DESC_DISCAPACIDAD'),
@@ -107,14 +112,15 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'DESC_CCT')->textInput(['maxlength' => true]) ?>
 
-    <div class="alert alert-danger">
-        <strong>Ingreso del Hogar</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">Ingreso del Hogar</font></strong>
+        <span class="glyphicon glyphicon-usd"></span>
     </div>
 
     <?= $form->field($model, 'TIPO_ZONA')->radioList(['U' => 'Zona Urbana', 'R' => 'Zona Rural']) ?>
 
     <?= $form->field($model, 'TRABAJA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="SITRABAJA">
     <?= $form->field($model, 'CVE_TIPO_EMPLEO')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($empleo, 'CVE_TIPO_EMPLEO', 'DESC_TIPO_EMPLEO'),
         'options' => ['placeholder' => 'Selecciona un tipo de empleo'],
@@ -138,22 +144,27 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]) ?>
+    </div>
+
+    <div class="NOTRABAJA">
 
     <?= $form->field($model, 'ALGUN_INGRESO')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="INGRESO">
     <?= $form->field($model, 'ALGUN_INGRESO_TIPO')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ALGUN_INGRESO_MONTO')->textInput() ?>
-
+    </div>
+    </div>
 
     <?= $form->field($model, 'ALQUILER_TERRENO')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="ALQUILER">
     <?= $form->field($model, 'ALQUILER_TERRENO_MONTO')->textInput() ?>
+    </div>
 
     <?= $form->field($model, 'PENSION')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
-    <?= $form->field($model, 'PENSION_MONTO')->textInput() ?>
-
+    <div class="PENSION">
+        <?= $form->field($model, 'PENSION_MONTO')->textInput() ?>
+    </div>
     <?= $form->field($model, 'CVE_SALARIO2')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($salario, 'CVE_SALARIO', 'DESC_SALARIO'),
         'options' => ['placeholder' => 'Selecciona una Opción'],
@@ -179,11 +190,11 @@ use kartik\select2\Select2;
     ]) ?>
 
     <?= $form->field($model, 'RECIBE_APOYO')->radioList(['S' => 'Si', 'N' => 'No']) ?>
+    <div class="APOYOS">
+        <?= $form->field($model, 'CUANTOS_APOYOS')->textInput() ?>
 
-    <?= $form->field($model, 'CUANTOS_APOYOS')->textInput() ?>
-
-    <?= $form->field($model, 'CUAL_APOYO')->textInput(['maxlength' => true]) ?>
-
+        <?= $form->field($model, 'CUAL_APOYO')->textInput(['maxlength' => true]) ?>
+    </div>
     <?= $form->field($model, 'CVE_CANT2')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($cantidades, 'CVE_CANT', 'DESC_CANT'),
         'options' => ['placeholder' => 'Selecciona una Cantidad'],
@@ -192,8 +203,9 @@ use kartik\select2\Select2;
         ],
     ]) ?>
 
-    <div class="alert alert-danger">
-        <strong>Ingreso de la Mujer</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">Ingreso de la Mujer</font></strong>
+        <span class="glyphicon glyphicon-heart"></span>
     </div>
 
     <?= $form->field($model, 'TIPO_ZONA2')->radioList(['U' => 'Zona Urbana', 'R' => 'Zona Rural']) ?>
@@ -216,22 +228,25 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'ACTIVIDAD_FUE')->radioList(['R' => 'Remunerada', 'N' => 'No Remunerada']) ?>
 
-    <?= $form->field($model, 'CVE_SALARIO3')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map($salario, 'CVE_SALARIO', 'DESC_SALARIO'),
-        'options' => ['placeholder' => 'Selecciona una Opción'],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]) ?>
+    <div class="REMUNERADA">
+        <?= $form->field($model, 'CVE_SALARIO3')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map($salario, 'CVE_SALARIO', 'DESC_SALARIO'),
+            'options' => ['placeholder' => 'Selecciona una Opción'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]) ?>
+    </div>
 
-    <div class="alert alert-danger">
-        <strong>Ingreso del Joven</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">Ingreso del Joven</font></strong>
+        <span class="glyphicon glyphicon-user"></span>
     </div>
 
     <?= $form->field($model, 'TIPO_ZONA3')->radioList(['U' => 'Zona Urbana', 'R' => 'Zona Rural']) ?>
 
     <?= $form->field($model, 'TRABAJA2')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="TRABAJO2">
     <?= $form->field($model, 'CVE_SALARIO4')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($salario, 'CVE_SALARIO', 'DESC_SALARIO'),
         'options' => ['placeholder' => 'Selecciona una Opción'],
@@ -239,11 +254,12 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]) ?>
+    </div>
 
     <?= $form->field($model, 'ESTUDIA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
 
     <?= $form->field($model, 'RECIBE_INGRESO')->radioList(['S' => 'Si', 'N' => 'No']) ?>
-
+    <div class="INGRESOJEFE">
     <?= $form->field($model, 'CVE_SALARIO5')->widget(Select2::classname(), [
         'data' => ArrayHelper::map($salario, 'CVE_SALARIO', 'DESC_SALARIO'),
         'options' => ['placeholder' => 'Selecciona una Opción'],
@@ -251,6 +267,7 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]) ?>
+    </div>
 
     <?= $form->field($model, 'BECA')->radioList(['S' => 'Si', 'N' => 'No']) ?>
 
@@ -274,8 +291,9 @@ use kartik\select2\Select2;
         ],
     ]) ?>
 
-    <div class="alert alert-danger">
-        <strong>Alimentación</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">ALIMENTACIÓN</font></strong>
+        <span class="glyphicon glyphicon-apple"></span>
     </div>
 
     <?= $form->field($model, 'CVE_CANT3')->widget(Select2::classname(), [
@@ -314,8 +332,9 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'MENOR_ACOSTARHAMBRE')->radioList(['S' => 'Si', 'N' => 'No']) ?>
 
-    <div class="alert alert-danger">
-        <strong>Caracteristicas de la vivienda</strong>
+    <div class="alert alert-success-alt">
+        <strong><font style="text-transform: uppercase;">Caracteristicas de la vivienda</font></strong>
+        <span class="glyphicon glyphicon-home"></span>
     </div>
 
     <?= $form->field($model, 'CVE_CASADONDEVIVE_ES')->widget(Select2::classname(), [
@@ -464,6 +483,6 @@ use kartik\select2\Select2;
 </div>
 
 <?=$this->registerJsFile(
-    '@web/frontend/assets/js/solrResult.js',
+    '@web/frontend/assets/js/socioeconomico.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );?>

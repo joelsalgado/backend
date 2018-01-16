@@ -14,8 +14,8 @@ use yii\helpers\ArrayHelper;
 
 <div class="container">
     <?php $form = ActiveForm::begin(); ?>
-    <div class="alert alert-danger">
-        <strong>IDENTIFICACIÓN GEOGRÁFICA</strong>
+    <div class="alert alert-success-alt">
+        <strong>IDENTIFICACIÓN GEOGRÁFICA  </strong><span class="glyphicon glyphicon-globe"></span>
     </div>
     <div class="row">
         <div class="col-sm-3">
@@ -65,8 +65,8 @@ use yii\helpers\ArrayHelper;
         </div>
         <div class="col-sm-4"> </div>
     </div>
-    <div class="alert alert-danger">
-        <strong>DIRECCIÓN DE VIVIENDA!</strong>
+    <div class="alert alert-success-alt">
+        <strong>DIRECCIÓN DE VIVIENDA </strong> <span class="glyphicon glyphicon-home"></span>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -118,8 +118,8 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
     </div>
-    <div class="alert alert-danger">
-        <strong>DATOS PERSONALES!</strong>
+    <div class="alert alert-success-alt">
+        <strong>DATOS PERSONALES </strong> <span class="glyphicon glyphicon-user"></span>
     </div>
     <div class="row">
         <div class="col-sm-4">
