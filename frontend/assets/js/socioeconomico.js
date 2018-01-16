@@ -11,6 +11,8 @@ $(document).ready(function() {
     remunerada = $('input:radio[name="Socioeconomico[ACTIVIDAD_FUE]"]:checked').val();
     trabajo2 = $('input:radio[name="Socioeconomico[TRABAJA2]"]:checked').val();
     ingreso2 = $('input:radio[name="Socioeconomico[RECIBE_INGRESO]"]:checked').val();
+    estudia = $('input:radio[name="Socioeconomico[ESTUDIA]"]:checked').val();
+    beca = $('input:radio[name="Socioeconomico[BECA]"]:checked').val();
 
 
     if (jefa == "S"){
@@ -60,6 +62,14 @@ $(document).ready(function() {
 
     if (ingreso2 == "N"){
         $('.INGRESOJEFE').hide();
+    }
+
+    if (estudia == "N"){
+        $('.ESTUDIA').hide();
+    }
+
+    if (beca == "N"){
+        $('.BECA').hide();
     }
 
 
@@ -164,6 +174,22 @@ $(function() {
             $('.INGRESOJEFE').hide();
         } else {
             $('.INGRESOJEFE').show();
+        }
+    });
+
+    $('input:radio[name="Socioeconomico[ESTUDIA]"]').change(function() {
+        if ($(this).val() == 'N') {
+            $('.ESTUDIA').hide();
+        } else {
+            $('.ESTUDIA').show();
+        }
+    });
+
+    $('input:radio[name="Socioeconomico[BECA]"]').change(function() {
+        if ($(this).val() == 'N') {
+            $('.BECA').hide();
+        } else {
+            $('.BECA').show();
         }
     });
 });
