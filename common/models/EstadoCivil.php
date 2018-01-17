@@ -28,4 +28,20 @@ class EstadoCivil extends \yii\db\ActiveRecord
             'ESTADO_CIVIL' => 'Estado  Civil',
         ];
     }
+
+    public static function cacheEstadoCivil(){
+        $cacheName = 'Estado_CvilCsche';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $estado = EstadoCivil::find()
+                ->select(['CVE_ESTADO_CIVIL', 'ESTADO_CIVIL'])
+                ->orderBy(['CVE_ESTADO_CIVIL' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $estado);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
 }
