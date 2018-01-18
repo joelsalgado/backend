@@ -2,20 +2,26 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Familia */
+$this->title = 'Actualizar Familiar';
 
-$this->title = 'Update Familia: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Familias', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->FOLIO, 'url' => ['view', 'id' => $model->FOLIO]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="familia-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="box">
+        <ul class="nav nav-tabs">
+            <li><?= Html::a( Yii::$app->params['apartado2'], ['metadato/update','id' => $model->FOLIO, 'mun' => $mun]) ?></li>
+            <li><?= Html::a( Yii::$app->params['apartado3'] , ['socioeconomico/update','id' => $model->FOLIO]) ?></li>
+            <li class="active"> <a href="#"><?=Yii::$app->params['apartado4'] ?> </a></li>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+        </ul>
+        <div class="box-header with-border">
+            <h3 class="box-title">CARACTERÍSTICAS SOCIODEMOGRÁFICAS </h3>
+        </div>
+        <div class="box-body">
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
+    </div>
 </div>

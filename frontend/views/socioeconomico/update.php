@@ -11,8 +11,9 @@ $this->title = 'Estudio SocioEconomico';
 <div class="socioeconomico-update">
     <div class="box">
         <ul class="nav nav-tabs">
-            <li><?= Html::a('Datos Personales', ['metadato/update','id' => $model->FOLIO, 'mun' => $mun]) ?></li>
-            <li class="active"><a href="#">Estudio SocioEconomico</a></li>
+            <li><?= Html::a(Yii::$app->params['apartado2'], ['metadato/update','id' => $model->FOLIO, 'mun' => $mun]) ?></li>
+            <li class="active"><a href="#"><?= Yii::$app->params['apartado3']?></a></li>
+            <li><?= Html::a(Yii::$app->params['apartado4'], ['/familia','id' => $model->FOLIO]) ?></li>
 
         </ul>
         <div class="box-header with-border">

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Metadato;
 use Yii;
 use common\models\Familia;
 use yii\data\ActiveDataProvider;
@@ -24,7 +25,7 @@ class FamiliaController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['GET'],
                 ],
             ],
         ];
@@ -36,6 +37,9 @@ class FamiliaController extends Controller
      */
     public function actionIndex($id)
     {
+        $model2 = Metadato::findOne($id);
+        $mun = $model2->CVE_MUNICIPIO;
+
         $dataProvider = new ActiveDataProvider([
             'query' => Familia::find()->where(['FOLIO' => $id]),
         ]);
@@ -43,6 +47,7 @@ class FamiliaController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'id' => $id,
+            'mun' =>$mun,
 
         ]);
     }
@@ -68,7 +73,9 @@ class FamiliaController extends Controller
     public function actionCreate($id)
     {
         $model = new Familia();
-
+        $model2 = Metadato::findOne($id);
+        $mun = $model2->CVE_MUNICIPIO;
+        $this->increment();
         if ($model->load(Yii::$app->request->post())) {
             $query = Familia::find()
                 ->where(['FOLIO' => $id])
@@ -110,8 +117,6 @@ class FamiliaController extends Controller
             $model->IP = $ip;
             
 
-
-
             $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 
             if($model->save()) {
@@ -122,39 +127,49 @@ class FamiliaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'mun' => $mun,
+            'id' => $id
         ]);
     }
 
-    /**
-     * Updates an existing Familia model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->FOLIO]);
+    public function actionUpdate($id,$folio)
+    {
+        $model = Familia::find()->where(['FOLIO' => $id, 'FOLIO_FUR' => $folio])->one();
+        $model2 = Metadato::findOne($id);
+        $mun = $model2->CVE_MUNICIPIO;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $request = New Request;
+
+            $user = Yii::$app->user->id;
+
+            $ip = $request->getUserIp();
+
+            $model->USU = $user.'';
+
+            $model->IP = $ip;
+
+            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
+
+            if($model->save()){
+                return $this->redirect(['index', 'id' => $model->FOLIO]);
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'mun' => $mun,
         ]);
     }
 
-    /**
-     * Deletes an existing Familia model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
+    public function actionDelete($id,$folio)
     {
-        $this->findModel($id)->delete();
+        $model = Familia::find()->where(['FOLIO' =>$id, 'FOLIO_FUR'=> $folio])->one();
+
+        $model->delete();
+
 
         return $this->redirect(['index', 'id' => $id]);
     }
@@ -173,5 +188,17 @@ class FamiliaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function increment()
+    {
+        $count = "SELECT count(*) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = '" . Yii::$app->params['sequenceFamilia'] . "'";
+        $val = Yii::$app->db->createCommand($count)->queryOne();
+        $value = $val["COUNT(*)"];
+
+        if ($value == 0) {
+            $sql = "CREATE sequence " . Yii::$app->params['sequenceFamilia'];
+            $result = Yii::$app->db->createCommand($sql)->query();
+        }
     }
 }
