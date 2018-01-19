@@ -47,4 +47,21 @@ class Documentos extends \yii\db\ActiveRecord
             'STATUS_1' => 'Status 1',
         ];
     }
+
+    public static function cacheDocumentosOf(){
+        $cacheName = 'DocumentosOfCsche';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $docof = Documentos::find()
+                ->select(['CVE_DOCUMENTO', 'DESC_DOCUMENTO'])
+                ->where(['STATUS_1' => 'A'])
+                ->orderBy(['CVE_DOCUMENTO' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $docof);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
 }

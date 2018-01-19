@@ -12,6 +12,7 @@ use common\models\Localidad;
 use common\models\Municipio;
 use common\models\Nacionalidades;
 use common\models\Ponderacion;
+use common\models\Secciones;
 use common\models\Socioeconomico;
 use common\models\Status;
 use kartik\mpdf\Pdf;
@@ -70,7 +71,6 @@ class MetadatoController extends Controller
 
     public function actionCreate($mun)
     {
-
         $model = new Metadato();
         $docs = new Docs();
         $status = new Status();
@@ -79,15 +79,12 @@ class MetadatoController extends Controller
         $cuentas = new Cuentas();
         $socioeconomico = new Socioeconomico();
 
-        $loc = $this->localidades($mun);
-
-        $ageb = $this->agebs($mun);
-
-        $nac = $this->nacionalidades();
-
-        $doc = $this->documentos();
-
-        $nacim = $this->entidades();
+        $loc = Localidad::cacheLocalidad($mun);
+        $ageb = Agebs::cacheAgebs($mun);
+        $nac = Nacionalidades::cacheNacionalidades();
+        $doc = Documentos::cacheDocumentosOf();
+        $nacim = EntidadFederativa::cacheEntidadFed();
+        $sec = Secciones::cacheSecciones($mun);
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -220,9 +217,6 @@ class MetadatoController extends Controller
                 $cuentas->save()){
                 return $this->redirect(['socioeconomico/update', 'id' => $model->FOLIO]);
             }
-            else{
-                throw new \yii\web\NotFoundHttpException;
-            }
         }
 
         return $this->render('create', [
@@ -233,6 +227,7 @@ class MetadatoController extends Controller
             'nac' => $nac,
             'doc' => $doc,
             'nacim' => $nacim,
+            'sec' => $sec,
         ]);
     }
 
@@ -241,15 +236,13 @@ class MetadatoController extends Controller
     {
         $model = $this->findModel($id);
 
-        $loc = $this->localidades($mun);
+        $loc = Localidad::cacheLocalidad($mun);
+        $ageb = Agebs::cacheAgebs($mun);
+        $sec = Secciones::cacheSecciones($mun);
+        $nac = Nacionalidades::cacheNacionalidades();
+        $doc = Documentos::cacheDocumentosOf();
+        $nacim = EntidadFederativa::cacheEntidadFed();
 
-        $ageb = $this->agebs($mun);
-
-        $nac = $this->nacionalidades();
-
-        $doc = $this->documentos();
-
-        $nacim = $this->entidades();
 
         if ($model->load(Yii::$app->request->post())) {
             $request = New Request;
@@ -264,8 +257,10 @@ class MetadatoController extends Controller
 
             $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $model->FOLIO]);
+            if($model->validate()){
+                if($model->save()) {
+                    return $this->redirect(['/socioeconomico/update', 'id' => $model->FOLIO]);
+                }
             }
 
         }
@@ -277,7 +272,8 @@ class MetadatoController extends Controller
             'nac' => $nac,
             'doc' => $doc,
             'nacim' => $nacim,
-            'mun' => $mun
+            'mun' => $mun,
+            'sec' => $sec
         ]);
     }
 
@@ -318,19 +314,10 @@ class MetadatoController extends Controller
 
     public function actionMunicipio()
     {
-        $cacheName = 'Municipios';
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $model = Municipio::find()
-                ->where(['ENTIDADFEDERATIVAID' => 15])
-                ->orderBy(['MUNICIPIONOMBRE' => 'DESC'])
-                ->all();
-            Yii::$app->cache->set($cacheName, $model);
-        }
-
-        if(Yii::$app->cache->get($cacheName)) {
-
+        $mun = Municipio::edomex();
+        if($mun) {
             return $this->render('municipio', [
-                'model' => Yii::$app->cache->get($cacheName),
+                'model' => $mun,
             ]);
         }
         else{
@@ -338,70 +325,6 @@ class MetadatoController extends Controller
         }
     }
 
-    protected function agebs($mun){
-        $cacheName = 'Agebs'.$mun;
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $ageb = Agebs::find()->where(['MUNICIPIO_ID' => $mun, 'ENTIDAD_ID' => 15])->all();
-            if($ageb){
-                Yii::$app->cache->set($cacheName,$ageb);
-            }
-            else{
-                throw new \yii\web\NotFoundHttpException;
-            }
-
-        }
-
-        if(Yii::$app->cache->get($cacheName)) {
-            return  Yii::$app->cache->get($cacheName);
-        }
-    }
-
-    protected function localidades($mun){
-        $cacheName = 'Localidades'.$mun;
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $loc = Localidad::find()
-                ->where(['CVE_ENTIDAD_FEDERATIVA' => 15, 'CVE_MUNICIPIO' => $mun])
-                ->all();
-            Yii::$app->cache->set($cacheName,$loc);
-        }
-
-        if(Yii::$app->cache->get($cacheName)) {
-            return  Yii::$app->cache->get($cacheName);
-        }
-    }
-
-    protected function nacionalidades(){
-        $cacheName = 'Nacionalidades';
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $nac = Nacionalidades::find()->all();
-            Yii::$app->cache->set($cacheName,$nac);
-        }
-        if(Yii::$app->cache->get($cacheName)) {
-            return  Yii::$app->cache->get($cacheName);
-        }
-    }
-
-    protected function documentos(){
-        $cacheName = 'Documentos';
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $doc = Documentos::find()->all();
-            Yii::$app->cache->set($cacheName,$doc);
-        }
-        if(Yii::$app->cache->get($cacheName)) {
-            return  Yii::$app->cache->get($cacheName);
-        }
-    }
-
-    protected function entidades(){
-        $cacheName = 'Entidades';
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $ent = EntidadFederativa::find()->all();
-            Yii::$app->cache->set($cacheName,$ent);
-        }
-        if(Yii::$app->cache->get($cacheName)) {
-            return  Yii::$app->cache->get($cacheName);
-        }
-    }
 
     protected function findModel($id)
     {

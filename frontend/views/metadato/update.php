@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = 'Actualizar';
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">Datos Personales</a></li>
             <li><?= Html::a('Estudio SocioEconomico', ['socioeconomico/update','id' => $model->FOLIO]) ?></li>
+            <li><?= Html::a(Yii::$app->params['apartado4'], ['/familia','id' => $model->FOLIO]) ?></li>
         </ul>
         <div class="box-header with-border">
             <h3 class="box-title">Datos Personales</h3>
@@ -27,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Actualizar';
                 'nac' => $nac,
                 'doc' => $doc,
                 'nacim' => $nacim,
+                'sec' => $sec,
             ]) ?>
         </div>
         <!-- /.box-body -->

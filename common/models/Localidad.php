@@ -70,4 +70,22 @@ class Localidad extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CATENTIDADFEDERATIVA::className(), ['CVE_ENTIDAD_FEDERATIVA' => '1']);
     }
+
+    public static function cacheLocalidad($mun){
+        $cacheName = 'LocalidadCache'.$mun;
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $loc = Localidad::find()
+                ->select(['CVE_LOCALIDAD', 'DESC_LOCALIDAD'])
+                ->where(['CVE_MUNICIPIO' => $mun, 'CVE_ENTIDAD_FEDERATIVA' => 15])
+                ->groupBy(['CVE_LOCALIDAD', 'DESC_LOCALIDAD'])
+                ->orderBy(['DESC_LOCALIDAD' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $loc);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
 }

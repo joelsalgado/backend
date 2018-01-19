@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'mun' => $mun,
                 'nac' => $nac,
                 'doc' => $doc,
-                'nacim' => $nacim
+                'nacim' => $nacim,
+                'sec' => $sec
             ]) ?>
         </div>
         <!-- /.box-body -->

@@ -178,7 +178,7 @@ class SocioeconomicoController extends Controller
         $combustible = Combustible::cacheCombustible();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->FOLIO]);
+            return $this->redirect(['/familia', 'id' => $model->FOLIO]);
         }
 
         return $this->render('update', [

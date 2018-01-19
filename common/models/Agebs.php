@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "CAT_AGEBS".
@@ -68,5 +69,24 @@ class Agebs extends \yii\db\ActiveRecord
     public function get1()
     {
         return $this->hasOne(CATENTIDADFEDERATIVA::className(), ['CVE_ENTIDAD_FEDERATIVA' => '1']);
+    }
+
+
+    public static function cacheAgebs($mun){
+        $cacheName = 'AgebCache'.$mun;
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $agebs = Agebs::find()
+                ->select(['AGEB_ID'])
+                ->where(['MUNICIPIO_ID' => $mun, 'ENTIDAD_ID' => 15])
+                ->groupBy(['AGEB_ID'])
+                ->orderBy(['AGEB_ID' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $agebs);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
     }
 }

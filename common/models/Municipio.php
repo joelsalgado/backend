@@ -4,36 +4,13 @@ namespace common\models;
 
 use Yii;
 
-/**
- * This is the model class for table "CAT_MUNICIPIO".
- *
- * @property int $ID
- * @property int $ENTIDADFEDERATIVAID
- * @property int $MUNICIPIOID
- * @property int $MUNICIPIOIDESPECIAL
- * @property string $MUNICIPIONOMBRE
- * @property int $MUNICIPIOESTATUS
- * @property int $REGIONID
- * @property int $MUNICIPIOID_SBIS
- * @property int $REGIONID_SBIS
- * @property int $REGIONID_GAB
- * @property int $COINCIDES_CANTPROG
- *
- * @property CATENTIDADFEDERATIVA $1
- */
 class Municipio extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
     public static function tableName()
     {
         return 'CAT_MUNICIPIO';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
@@ -44,9 +21,6 @@ class Municipio extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
@@ -64,9 +38,6 @@ class Municipio extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function get1()
     {
         return $this->hasOne(CATENTIDADFEDERATIVA::className(), ['CVE_ENTIDAD_FEDERATIVA' => '1']);

@@ -4,8 +4,13 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\Agebs;
+use common\models\Documentos;
+use common\models\EntidadFederativa;
+use common\models\Localidad;
 use common\models\Metadato;
 use common\models\Municipio;
+use common\models\Nacionalidades;
+use common\models\Secciones;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\filters\VerbFilter;
@@ -28,6 +33,7 @@ class ApiController extends ActiveController
                     'applicants' => ['get'],
                     'municipios' => ['get'],
                     'agebs' => ['get'],
+                    'localidades' => ['get'],
                     'create' => ['post'],
                 ],
             ],
@@ -60,26 +66,61 @@ class ApiController extends ActiveController
         }
     }
 
-    public function actionAgebs($id)
+    public function actionAgebs($mun)
     {
-        $cacheName = 'Agebs' . $id;
-
-        if (Yii::$app->cache->get($cacheName) === false) {
-            $ageb = Agebs::find()->where(['MUNICIPIO_ID' => $id, 'ENTIDAD_ID' => 15])->all();
-
+            $ageb = Agebs::cacheAgebs($mun);
             if($ageb) {
-                Yii::$app->cache->set($cacheName, $ageb);
+                return array('status' => true, 'data'=> $ageb);
             } else {
                 return array('status' => false, 'message'=> 'Los id son numericos de 1 al 125');
             }
-        }
+    }
 
-        if (Yii::$app->cache->get($cacheName)) {
-            return Yii::$app->cache->get($cacheName);
-        }else {
-            return array('status' => false, 'message'=> 'No hay perro');
+    public function actionLocalidades($mun)
+    {
+        $loc = Localidad::cacheLocalidad($mun);
+        if($loc) {
+            return array('status' => true, 'data'=> $loc);
+        } else {
+            return array('status' => false, 'message'=> 'Los id son numericos de 1 al 125');
         }
+    }
 
+    public function actionSecciones($mun)
+    {
+        $sec = Secciones::cacheSecciones($mun);
+        if($sec) {
+            return array('status' => true, 'data'=> $sec);
+        } else {
+            return array('status' => false, 'message'=> 'Los id son numericos de 1 al 125');
+        }
+    }
+
+    public function actionNacionalidades(){
+        $nac = Nacionalidades::cacheNacionalidades();
+        if($nac) {
+            return array('status' => true, 'data'=> $nac);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
+
+    public function actionDocumentof(){
+        $docOf = Documentos::cacheDocumentosOf();
+        if($docOf) {
+            return array('status' => true, 'data'=> $docOf);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
+
+    public function actionEntfed(){
+        $entfed = EntidadFederativa::cacheEntidadFed();
+        if($entfed) {
+            return array('status' => true, 'data'=> $entfed);
+        } else {
+            return new NotFoundHttpException();
+        }
     }
 
 

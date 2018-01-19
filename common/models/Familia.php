@@ -88,11 +88,11 @@ class Familia extends \yii\db\ActiveRecord
         $armada = $anio.$mes.$dia;
 
         if ($fechaCve != $armada){
-            $this->addError('FOLIO_ID_OFICIAL', 'El CURP no corrresponde a tu fecha de nacimiento.');
+            $this->addError('FOLIO_ID_OFICIAL', 'Clave de Elector no corrresponde a tu fecha de nacimiento.');
         }
 
         if ($sexo != $sexoCve){
-            $this->addError('FOLIO_ID_OFICIAL', 'El CURP no corrresponde a tu Sexo.');
+            $this->addError('FOLIO_ID_OFICIAL', 'Clave de Elector no corrresponde a tu Sexo.');
         }
 
     }

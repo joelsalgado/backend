@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class Nacionalidades extends \yii\db\ActiveRecord
 {
@@ -29,5 +30,21 @@ class Nacionalidades extends \yii\db\ActiveRecord
             'NOMBRE_COMUN' => 'Nombre  Comun',
             'NOMBRE_OFICIAL' => 'Nombre  Oficial',
         ];
+    }
+
+    public static function cacheNacionalidades(){
+        $cacheName = 'NationalitiesCsche';
+        if (Yii::$app->cache->get($cacheName) === false) {
+            $nation = Nacionalidades::find()
+                ->select(['CVE_NACIONALIDAD', 'DESC_NACIONALIDAD'])
+                ->orderBy(['CVE_NACIONALIDAD' => 'DESC'])
+                ->all();
+            Yii::$app->cache->set($cacheName, $nation);
+        }
+        if(Yii::$app->cache->get($cacheName)) {
+            return Yii::$app->cache->get($cacheName);
+        } else {
+            return new NotFoundHttpException();
+        }
     }
 }
