@@ -15,7 +15,7 @@ class Metadato extends \yii\db\ActiveRecord
     {
         return [
             [['N_PERIODO', 'CVE_PROGRAMA', 'NUMERO_HIJOS', 'TP_ID_OFICIAL', 'CVE_ESTADO_CIVIL', 'CVE_GRADO_ESTUDIOS', 'CVE_PARENTESCO', 'CVE_NACIONALIDAD', 'CVE_LUGAR_NACIMIENTO', 'CVE_ACTIVIDAD_LABORAL', 'CVE_SITUACION_LABORAL', 'SECCION', 'CVE_LOCALIDAD', 'CVE_MUNICIPIO', 'CVE_ENTIDAD_FEDERATIVA', 'CVE_REGION', 'LATITUD', 'LONGITUD', 'TP_ID_OFICIAL_C', 'CVE_ESTADO_CIVIL_C', 'CVE_GRADO_ESTUDIOS_C', 'CVE_PARENTESCO_C', 'CVE_NACIONALIDAD_C', 'CVE_LUGAR_NACIMIENTO_C', 'CVE_ACTIVIDAD_LABORAL_C', 'CVE_SITUACION_LABORAL_C', 'SECCION_C', 'CVE_MUNICIPIO_C', 'CVE_ENTIDAD_FEDERATIVA_C', 'CVE_REGION_C', 'LATITUD_C', 'LONGITUD_C'], 'number'],
-            [['FOLIO', 'PRIMER_APELLIDO', 'NOMBRES', 'SEXO', 'FECHA_NACIMIENTO', 'CVE_NACIONALIDAD', 'CURP', 'TELEFONO', 'CVE_LUGAR_NACIMIENTO', 'CODIGO_POSTAL', 'OTRA_REFERENCIA', 'CVE_LOCALIDAD', 'AGEB', 'CALLE', 'COLONIA', 'CVE_ESTADO_CIVIL', 'CORREO_ELECTRONICO', 'CODIGO_POSTAL', 'SECCION'], 'required', 'message' => 'Campo Obligatorio'],
+            [['FOLIO', 'PRIMER_APELLIDO', 'NOMBRES', 'SEXO', 'FECHA_NACIMIENTO', 'CVE_NACIONALIDAD', 'CURP', 'TELEFONO', 'CVE_LUGAR_NACIMIENTO', 'CODIGO_POSTAL', 'OTRA_REFERENCIA', 'CVE_LOCALIDAD', 'AGEB', 'CALLE', 'COLONIA', 'CVE_ESTADO_CIVIL', 'CORREO_ELECTRONICO', 'CODIGO_POSTAL', 'SECCION','RFC'], 'required', 'message' => 'Campo Obligatorio'],
             [['FOLIO', 'CODIGO_POSTAL', 'CODIGO_POSTAL_C', 'CVE_LOCALIDAD_C', 'NUMERO_HIJOS_C'], 'integer', 'message' => 'Debe ser un numero entero'],
             [['FECHA_NACIMIENTO', 'FECHA_NACIMIENTO_C', 'FECHA_REG', 'FECHA_M'], 'string'],
             [['CODIGO_POSTAL'], 'match', 'pattern' => '/[0-9]{5}/', 'message' => 'Deben ser 5 digitos'],
@@ -32,8 +32,9 @@ class Metadato extends \yii\db\ActiveRecord
             [['AGEB', 'AGEB_C'], 'string', 'max' => 15],
             [['CORREO_ELECTRONICO', 'CORREO_ELECTRONICO_C'], 'string', 'max' => 60],
             [['FECHA_NACIMIENTO'],'date', 'format'=>'dd/mm/yyyy', 'message' => 'Formato no valido'],
-            ['CORREO_ELECTRONICO','email', 'message' => 'Formato no valido'],
+            ['CORREO_ELECTRONICO','email', 'message' => 'Formato de correo incorrecto'],
             [['PRIMER_APELLIDO','SEGUNDO_APELLIDO', 'NOMBRES'], 'match', 'pattern' => '/^[a-záéíóúñ\s]+$/i', 'message' => 'Sólo se aceptan letras'],
+            [['TELEFONO','FAX'], 'match', 'pattern' => '/^[0-9+\s]+$/i', 'message' => 'Solo se aceptan números'],
             [['CURP'], 'match', 'pattern' => '/[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]/', 'message' => 'Formato no valido'],
             ['CURP', 'match', 'pattern' => '/^.{1,18}$/', 'message' => 'Tiene que tener 18 caracteres'],
             ['CURP', 'validateCurp'],

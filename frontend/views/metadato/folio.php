@@ -1,36 +1,26 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: Joel Salgado
+ * Date: 22/01/2018
+ * Time: 10:35 AM
+ */
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Integrantes del Hogar ';
+$this->title = 'Registro Finalizado';
 
 ?>
-<div class="familia-index">
+<div class="finalizado">
 
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li><?= Html::a(Yii::$app->params['apartado2'], ['metadato/update','id' => $id, 'mun' => $mun]) ?></li>
-            <li><?= Html::a(Yii::$app->params['apartado3'], ['socioeconomico/update','id' => $id]) ?></li>
-            <li class="active"><a href="#"><?=Yii::$app->params['apartado2']?></a></li>
-
-        </ul>
         <div class="box-header with-border">
-            <h3 class="box-title">CARACTERÍSTICAS SOCIODEMOGRÁFICAS </h3>
+            <h3 class="box-title">Registro Finalizado</h3>
         </div>
         <div class="box-body">
-            <?php Pjax::begin(); ?>
-
             <p>
-                <?= Html::a('Agregar integrante', ['create', 'id'=>$id], ['class' => 'btn btn-success']) ?>
-                <?php if ($boton == 'true'){ ?>
-                <?= Html::a('FINALIZAR REGISTRO', ['/metadato/folio', 'id'=>$id], ['class' => 'btn btn-danger']) ?>
-                <?php } ?>
+                <?= Html::a('Nuevo Solicitante', ['municipio'], ['class' => 'btn btn-success']) ?>
             </p>
-
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'summary' => "Mostrando {begin}-{end} de {totalCount} elementos",
@@ -39,8 +29,8 @@ $this->title = 'Integrantes del Hogar ';
 
                     //'N_PERIODO',
                     //'CVE_PROGRAMA',
-                    //'FOLIO',
-                    'CONSECUTIVO',
+                    'FOLIO',
+                    //'CONSECUTIVO',
                     //'FOLIO_FUR',
                     //'FOLIO_RELACIONADO',
                     //'PRIMER_APELLIDO',
@@ -63,7 +53,7 @@ $this->title = 'Integrantes del Hogar ';
                     //'CVE_DISCAPACIDAD',
                     //'SABELEER',
                     //'STATUS_2',
-                    //'FECHA_REG',
+                    'FECHA_REG',
                     //'USU',
                     //'PW',
                     //'IP',
@@ -83,28 +73,17 @@ $this->title = 'Integrantes del Hogar ';
                                     'title' => Yii::t('app', 'editar'),
                                 ]);
                             },
-                            'borrar' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, [
-                                    'title' => Yii::t('app', 'borrar'),
-                                ]);
-                            }
-
-
                         ],
                         'urlCreator' => function ($action, $model, $key, $index) {
                             if ($action === 'update') {
-                                $url ='/familia/update?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
-                                return $url;
-                            }
-                            if ($action === 'borrar') {
-                                $url ='/familia/delete?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
+                                $url ='/metadato/update?id='.$model->FOLIO.'&mun='.$model->CVE_MUNICIPIO;
                                 return $url;
                             }
                         }
                     ],
                 ],
             ]); ?>
-            <?php Pjax::end(); ?>
         </div>
     </div>
 </div>
+

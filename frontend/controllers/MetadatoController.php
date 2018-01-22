@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Agebs;
+use common\models\Apartados;
 use common\models\Cuentas;
 use common\models\Diario;
 use common\models\Docs;
@@ -20,6 +21,7 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 use Yii;
 use common\models\Metadato;
 use common\models\MetadatoSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -78,6 +80,7 @@ class MetadatoController extends Controller
         $diario = new Diario();
         $cuentas = new Cuentas();
         $socioeconomico = new Socioeconomico();
+        $apartados  = new Apartados();
 
         $loc = Localidad::cacheLocalidad($mun);
         $ageb = Agebs::cacheAgebs($mun);
@@ -132,6 +135,23 @@ class MetadatoController extends Controller
             $socioeconomico->USU = $user.'';
 
             $socioeconomico->IP = $ip;
+
+
+            $apartados->FOLIO = $id;
+
+            $apartados->N_PERIODO = $periodo;
+
+            $apartados->CVE_PROGRAMA = $programa;
+
+            $apartados->FOLIO_RELACIONADO = $folio_relacionado;
+
+            $apartados->APARTADO1 = 1;
+
+            $apartados->APARTADO2 = 1;
+
+            $apartados->USU = $user.'';
+
+            $apartados->IP = $ip;
 
 
             $docs->FOLIO = $id;
@@ -214,6 +234,7 @@ class MetadatoController extends Controller
                 $status->save() &&
                 $ponderacion->save() &&
                 $diario->save() &&
+                $apartados->save() &&
                 $cuentas->save()){
                 return $this->redirect(['socioeconomico/update', 'id' => $model->FOLIO]);
             }
@@ -275,6 +296,26 @@ class MetadatoController extends Controller
             'mun' => $mun,
             'sec' => $sec
         ]);
+    }
+
+    public function actionFolio($id){
+
+        $metadato = Metadato::find()->where(['FOLIO' => $id]);
+        if($metadato){
+            Yii::$app->session->setFlash('success', "Registro Correto tu folio es: ".$id."");
+            $apartado = Apartados::findOne($id);
+            $apartado->APARTADO4 = 1;
+            if ($apartado->save()) {
+                $dataProvider = new ActiveDataProvider([
+                    'query' => $metadato,
+                ]);
+
+                return $this->render('folio', [
+                    'dataProvider' => $dataProvider,
+                ]);
+            }
+
+        }
     }
 
 

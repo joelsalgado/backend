@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Actividad;
 use common\models\ActividadLaboral;
+use common\models\Apartados;
 use common\models\Cantidades;
 use common\models\CasaDondeVive;
 use common\models\Combustible;
@@ -152,6 +153,7 @@ class SocioeconomicoController extends Controller
         $model = $this->findModel($id);
         $model2 = Metadato::findOne($id);
         $mun = $model2->CVE_MUNICIPIO;
+        $apartado = Apartados::findOne($id);
 
         $parentesco = Parentesco::cacheParentesco();
         $lengua = Lenguas::cacheLengua();
@@ -177,8 +179,11 @@ class SocioeconomicoController extends Controller
         $servluz = ServicioLuz::cacheServicioLuz();
         $combustible = Combustible::cacheCombustible();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/familia', 'id' => $model->FOLIO]);
+        if ($model->load(Yii::$app->request->post())) {
+            $apartado->APARTADO3 = 1;
+            if ($model->save() && $apartado->save()){
+                return $this->redirect(['/familia', 'id' => $model->FOLIO]);
+            }
         }
 
         return $this->render('update', [

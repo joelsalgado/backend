@@ -39,6 +39,16 @@ class FamiliaController extends Controller
     {
         $model2 = Metadato::findOne($id);
         $mun = $model2->CVE_MUNICIPIO;
+        $query = Familia::find()
+            ->where(['FOLIO' => $id])
+            ->orderBy('FECHA_REG DESC')
+            ->one();
+
+        if($query){
+            $boton = true;
+        }else{
+            $boton = false;
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => Familia::find()->where(['FOLIO' => $id]),
@@ -48,6 +58,7 @@ class FamiliaController extends Controller
             'dataProvider' => $dataProvider,
             'id' => $id,
             'mun' =>$mun,
+            'boton' => $boton
 
         ]);
     }

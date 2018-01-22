@@ -182,8 +182,7 @@ use yii\helpers\ArrayHelper;
                 <div class="form-group">
                     <?= $form->field($model, 'CVE_NACIONALIDAD')->widget(Select2::classname(), [
                         'data' => ArrayHelper::map($nac, 'CVE_NACIONALIDAD', 'DESC_NACIONALIDAD'),
-                        'value' => 2,
-                        'options' => ['placeholder' => 'Selecciona una Nacionalidad'],
+                        'options' => ['value' => 126, 'placeholder' => 'Selecciona una Nacionalidad'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],

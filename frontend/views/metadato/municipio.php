@@ -4,6 +4,7 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 $this->title = 'Municipio';
+$mun = 1;
 ?>
 
 <?= Html::beginForm(
@@ -23,6 +24,7 @@ $this->title = 'Municipio';
                 'name' => 'mun',
                 'data' => ArrayHelper::map($model, 'MUNICIPIOID', 'MUNICIPIONOMBRE'),
                 'options' => [
+                    'value' => 1,
                     'placeholder' => 'Selecciona un Municipio',
                     'required' => 'true'
 
