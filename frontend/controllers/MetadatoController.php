@@ -23,6 +23,7 @@ use Yii;
 use common\models\Metadato;
 use common\models\MetadatoSearch;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,6 +40,17 @@ class MetadatoController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'municipio', 'folio'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'municipio', 'folio'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
