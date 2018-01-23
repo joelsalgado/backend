@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use frontend\widgets\Apartados\Apartados;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -12,12 +13,14 @@ $this->title = 'Integrantes del Hogar ';
 <div class="familia-index">
 
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li><?= Html::a(Yii::$app->params['apartado2'], ['metadato/update','id' => $id, 'mun' => $mun]) ?></li>
-            <li><?= Html::a(Yii::$app->params['apartado3'], ['socioeconomico/update','id' => $id]) ?></li>
-            <li class="active"><a href="#"><?=Yii::$app->params['apartado2']?></a></li>
-
-        </ul>
+        <?=
+        Apartados::widget([
+            'tipo'=>4,
+            'apartado' => $apartados,
+            'id' => $id,
+            'mun' => $mun
+        ])
+        ?>
         <div class="box-header with-border">
             <h3 class="box-title">CARACTERÍSTICAS SOCIODEMOGRÁFICAS </h3>
         </div>

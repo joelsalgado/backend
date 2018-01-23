@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\widgets\Apartados\Apartados;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Socioeconomico */
@@ -10,12 +11,14 @@ $this->title = 'Estudio SocioEconomico';
 ?>
 <div class="socioeconomico-update">
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li><?= Html::a(Yii::$app->params['apartado2'], ['metadato/update','id' => $model->FOLIO, 'mun' => $mun]) ?></li>
-            <li class="active"><a href="#"><?= Yii::$app->params['apartado3']?></a></li>
-            <li><?= Html::a(Yii::$app->params['apartado4'], ['/familia','id' => $model->FOLIO]) ?></li>
-
-        </ul>
+        <?=
+        Apartados::widget([
+            'tipo'=>3,
+            'apartado' => $apartado,
+            'id' => $model->FOLIO,
+            'mun' => $mun
+        ])
+        ?>
         <div class="box-header with-border">
             <h3 class="box-title">Estudio SocioEconomico</h3>
         </div>

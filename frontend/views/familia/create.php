@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use frontend\widgets\Apartados\Apartados;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Familia */
@@ -13,11 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="familia-create">
 
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li><?= Html::a( Yii::$app->params['apartado2'], ['metadato/update','id' => $id, 'mun' => $mun]) ?></li>
-            <li><?= Html::a( Yii::$app->params['apartado3'] , ['socioeconomico/update','id' => $id]) ?></li>
-            <li class="active"> <a href="#"><?=Yii::$app->params['apartado4'] ?> </a></li>
-        </ul>
+        <?=
+        Apartados::widget([
+            'tipo'=>4,
+            'apartado' => $apartados,
+            'id' => $id,
+            'mun' => $mun
+        ])
+        ?>
         <div class="box-header with-border">
             <h3 class="box-title">Datos SocioDemograficos</h3>
         </div>

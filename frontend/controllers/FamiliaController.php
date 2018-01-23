@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Apartados;
 use common\models\Metadato;
 use Yii;
 use common\models\Familia;
@@ -38,6 +39,7 @@ class FamiliaController extends Controller
     public function actionIndex($id)
     {
         $model2 = Metadato::findOne($id);
+        $apartados = Apartados::findOne($id);
         $mun = $model2->CVE_MUNICIPIO;
         $query = Familia::find()
             ->where(['FOLIO' => $id])
@@ -58,7 +60,8 @@ class FamiliaController extends Controller
             'dataProvider' => $dataProvider,
             'id' => $id,
             'mun' =>$mun,
-            'boton' => $boton
+            'boton' => $boton,
+            'apartados' => $apartados
 
         ]);
     }
@@ -85,6 +88,7 @@ class FamiliaController extends Controller
     {
         $model = new Familia();
         $model2 = Metadato::findOne($id);
+        $apartados = Apartados::findOne($id);
         $mun = $model2->CVE_MUNICIPIO;
         $this->increment();
         if ($model->load(Yii::$app->request->post())) {
@@ -139,7 +143,8 @@ class FamiliaController extends Controller
         return $this->render('create', [
             'model' => $model,
             'mun' => $mun,
-            'id' => $id
+            'id' => $id,
+            'apartados' => $apartados,
         ]);
     }
 
@@ -148,6 +153,7 @@ class FamiliaController extends Controller
     {
         $model = Familia::find()->where(['FOLIO' => $id, 'FOLIO_FUR' => $folio])->one();
         $model2 = Metadato::findOne($id);
+        $apartados = Apartados::findOne($id);
         $mun = $model2->CVE_MUNICIPIO;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -172,6 +178,7 @@ class FamiliaController extends Controller
         return $this->render('update', [
             'model' => $model,
             'mun' => $mun,
+            'apartados' => $apartados,
         ]);
     }
 
