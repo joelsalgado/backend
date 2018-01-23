@@ -368,7 +368,7 @@ use kartik\select2\Select2;
     <div class="row">
         <div class="alert alert-success-alt">
             <strong><font style="text-transform: uppercase;">Ingreso de la Mujer</font></strong>
-            <span class="glyphicon glyphicon-heart"></span>
+            <i class="fa fa-female" aria-hidden="true"></i>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -423,7 +423,8 @@ use kartik\select2\Select2;
     <div class="row">
         <div class="alert alert-success-alt">
             <strong><font style="text-transform: uppercase;">Ingreso del Joven</font></strong>
-            <span class="glyphicon glyphicon-user"></span>
+            <i class="fa fa-male" aria-hidden="true"></i>
+
         </div>
         <div class="row">
             <div class="col-sm-3">

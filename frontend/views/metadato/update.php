@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use frontend\widgets\Apartados\Apartados;
 /* @var $this yii\web\View */
 /* @var $model common\models\Metadato */
 
@@ -11,11 +11,15 @@ $this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="metadato-update">
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#">Datos Personales</a></li>
-            <li><?= Html::a('Estudio SocioEconomico', ['socioeconomico/update','id' => $model->FOLIO]) ?></li>
-            <li><?= Html::a(Yii::$app->params['apartado4'], ['/familia','id' => $model->FOLIO]) ?></li>
-        </ul>
+        <?=
+        Apartados::widget([
+            'tipo'=>2,
+            'apartado' => $apartado,
+            'id' => $model->FOLIO,
+            'mun' => $mun
+        ])
+        ?>
+
         <div class="box-header with-border">
             <h3 class="box-title">Datos Personales</h3>
         </div>

@@ -16,6 +16,7 @@ use common\models\Ponderacion;
 use common\models\Secciones;
 use common\models\Socioeconomico;
 use common\models\Status;
+use frontend\models\Municipios;
 use kartik\mpdf\Pdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use Yii;
@@ -73,6 +74,8 @@ class MetadatoController extends Controller
 
     public function actionCreate($mun)
     {
+
+        //$mun = Yii::$app->request->get('Municipios')['mun'];
         $model = new Metadato();
         $docs = new Docs();
         $status = new Status();
@@ -256,6 +259,7 @@ class MetadatoController extends Controller
     public function actionUpdate($id,$mun)
     {
         $model = $this->findModel($id);
+        $apartado = Apartados::findOne($id);
 
         $loc = Localidad::cacheLocalidad($mun);
         $ageb = Agebs::cacheAgebs($mun);
@@ -294,7 +298,8 @@ class MetadatoController extends Controller
             'doc' => $doc,
             'nacim' => $nacim,
             'mun' => $mun,
-            'sec' => $sec
+            'sec' => $sec,
+            'apartado' => $apartado
         ]);
     }
 
@@ -353,12 +358,28 @@ class MetadatoController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionMunicipio()
+
+    public function actionMunicipio($id = null)
     {
-        $mun = Municipio::edomex();
-        if($mun) {
+        $model = Municipio::edomex();
+
+        if($id != null){
+            $model2 = Metadato::findOne($id);
+            $apartado = Apartados::findOne($id);
+            $mun = $model2->CVE_MUNICIPIO;
+            $folio = $model2->FOLIO;
+        }else{
+            $mun = null;
+            $folio = null;
+            $apartado = null;
+        }
+
+        if($model) {
             return $this->render('municipio', [
-                'model' => $mun,
+                'mun' => $mun,
+                'model' => $model,
+                'id' => $folio,
+                'apartado' => $apartado
             ]);
         }
         else{

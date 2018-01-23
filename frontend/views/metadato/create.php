@@ -1,20 +1,18 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\widgets\Apartados\Apartados;
+$this->title = 'Datos Personales';
 
-
-/* @var $this yii\web\View */
-/* @var $model common\models\Metadato */
-
-$this->title = 'Crear Solicitante';
-$this->params['breadcrumbs'][] = ['label' => 'Solicitantes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="metadato-create">
     <div class="box">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#">Datos Personales</a></li>
-        </ul>
+        <?=
+        Apartados::widget([
+            'tipo'=>2,
+            'accion'=> 'c',
+        ])
+        ?>
         <div class="box-header with-border">
             <h3 class="box-title">Datos Personales</h3>
         </div>

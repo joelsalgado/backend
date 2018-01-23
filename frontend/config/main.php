@@ -56,6 +56,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'metadato/create/<mun>' => 'metadato/create/',
+                'metadato/municipio/<id>' => 'metadato/municipio/',
+                'metadato/update/<id>/<mun>' => 'metadato/update/',
             ],
         ],
         'response' => [
