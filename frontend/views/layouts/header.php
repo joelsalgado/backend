@@ -20,22 +20,22 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Joel Salgado</span>
+                        <img src="/images/user.png" class="user-image" alt="User Image"/>
+                        <span class="hidden-xs"><?=  Yii::$app->user->identity->name ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                            <img src="/images/user.png" class="img-circle"
                                  alt="User Image"/>
                             <p>
-                                <?= Yii::$app->user->id ?>
+                                <?= Yii::$app->user->identity->name ?>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
+
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(

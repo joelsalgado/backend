@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 $this->title = 'Crear usuario';?>
-<div class="user-update" id="user-update">
+<div class="user-create" id="user-create">
     <h1 class="titulo"><?= Html::encode($this->title) ?></h1>
     <div class="panel">
         <div class="panel-body">

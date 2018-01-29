@@ -18,7 +18,7 @@ dmstr\web\AdminLteAsset::register($this);
     <?php $this->head() ?>
     <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/favicon2.ico" type="image/x-icon" />
 </head>
-<body class="login-page">
+<body background="/images/EDOMEX3.png">
 
 <?php $this->beginBody() ?>
 

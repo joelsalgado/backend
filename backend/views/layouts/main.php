@@ -38,7 +38,7 @@ use yii\helpers\Url;
                     <div class="left_col scroll-view">
 
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="<?= Yii::$app->homeUrl; ?>" class="site_title"><span>SEDESEN</span></a>
+                            <a href="<?= Yii::$app->homeUrl; ?>" class="site_title"><span>SEDESEM</span></a>
                         </div>
 
                         <!-- sidebar menu -->

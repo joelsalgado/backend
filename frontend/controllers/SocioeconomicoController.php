@@ -51,7 +51,7 @@ class SocioeconomicoController extends Controller
                 'only' => ['update'],
                 'rules' => [
                     [
-                        'actions' => ['update'],
+                        'actions' => ['update','index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

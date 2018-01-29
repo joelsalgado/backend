@@ -12,6 +12,15 @@
                 "create",
                 "update"
             ]
+        },
+        "UsersFrontendController": {
+            "actions": [
+                "index",
+                "create",
+                "update",
+                "delete",
+                "view"
+            ]
         }
     },
     "menu": {
@@ -24,6 +33,11 @@
             "url": "users/user",
             "label": "Usuarios",
             "icon": "user"
+        },
+        "UsersFrontendController": {
+            "url": "users-frontend",
+            "label": "Usuarios",
+            "icon": "group"
         }
 
     }

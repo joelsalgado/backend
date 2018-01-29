@@ -1,4 +1,11 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Joel Salgado
+ * Date: 24/01/2018
+ * Time: 03:14 PM
+ */
+
 namespace frontend\models;
 
 use Yii;
@@ -9,12 +16,10 @@ use yii\web\IdentityInterface;
 use common\models\UsersFrontend;
 
 
-class User extends ActiveRecord implements IdentityInterface
+class Users2 extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-    public $password_hash;
-    public $auth_key;
 
     /**
      * @inheritdoc
@@ -69,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['user' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -139,8 +144,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return  $this->password === $password;
-
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**

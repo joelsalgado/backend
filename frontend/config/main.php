@@ -32,8 +32,9 @@ return [
             ]
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'frontend\models\User',
+            'enableAutoLogin' => false,
+            'authTimeout' => 3600,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'session' => [
