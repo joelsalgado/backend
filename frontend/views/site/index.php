@@ -3,17 +3,13 @@ use yii\helpers\Html;
 $this->title = 'FUR';
 ?>
 <div class="site-index">
-
-    <div class="body-content">
-        <div class="jumbotron">
-            <h1> VIVIENDA INDIGENA DIGNA!</h1>
-            <?= Html::a('Empezar', ['/metadato/municipio'], ['class' => 'btn btn-lg btn-success']) ?>
+    <div class="box">
+        <div class="box-body">
+            <div class="jumbotron">
+                <img src="<?= Yii::$app->homeUrl ?>images/casa.jpg" class="img-circle" alt="Cinque Terre" width="202" height="202">
+                <h1><?= Yii::$app->params['nomprog'] ?></h1>
+                <?= Html::a('Empezar', ['/metadato/municipio'], ['class' => 'btn btn-lg btn-success']) ?>
+            </div>
         </div>
-
-        <div class="row">
-
-
-        </div>
-
     </div>
 </div>
