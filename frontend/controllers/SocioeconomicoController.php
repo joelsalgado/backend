@@ -72,6 +72,7 @@ class SocioeconomicoController extends Controller
      */
     public function actionIndex()
     {
+        die;
         $dataProvider = new ActiveDataProvider([
             'query' => Socioeconomico::find(),
         ]);
@@ -89,6 +90,7 @@ class SocioeconomicoController extends Controller
      */
     public function actionView($id)
     {
+        die;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -163,73 +165,80 @@ class SocioeconomicoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model2 = Metadato::findOne($id);
-        $mun = $model2->CVE_MUNICIPIO;
-        $apartado = Apartados::findOne($id);
+        if ($model){
+            $model2 = Metadato::findOne($id);
+            $mun = $model2->CVE_MUNICIPIO;
+            $apartado = Apartados::findOne($id);
 
-        $parentesco = Parentesco::cacheParentesco();
-        $lengua = Lenguas::cacheLengua();
-        $cantidades = Cantidades::cacheCantidades();
-        $radicar = TiempoRadicar::cacheRadicar();
-        $enfermedad = Enfermedades::cacheEnfermedad();
-        $discapacidad = Discapacidad::cacheDisc();
-        $institucion = InstitucionesSalud::cacheInstituciones();
-        $orfandad = Orfandad::cacheOrfandad();
-        $grado = GradoEstudio::cacheGrado();
-        $empleo = TipoEmpleo::cacheEmpleo();
-        $actividad = ActividadLaboral::cacheAL();
-        $salario = Salarios::cacheSalarios();
-        $dependientes = DependientesEconomicos::cacheDependientes();
-        $actividad2 = Actividad::cacheActividad();
-        $realizaA = RealizaActividad::cacheRealizaAct();
-        $pering = PerIngresos::cachePerIngresos();
-        $tiempo = Tiempo::cacheTiempo();
-        $casadonde = CasaDondeVive::cacheCasaDonde();
-        $material = MaterialVivienda::cacheMaterial();
-        $servicioAgua= ServicioAgua::cacheServicioAgua();
-        $sandren = Sandren::cacheSandren();
-        $servluz = ServicioLuz::cacheServicioLuz();
-        $combustible = Combustible::cacheCombustible();
+            $parentesco = Parentesco::cacheParentesco();
+            $lengua = Lenguas::cacheLengua();
+            $cantidades = Cantidades::cacheCantidades();
+            $radicar = TiempoRadicar::cacheRadicar();
+            $enfermedad = Enfermedades::cacheEnfermedad();
+            $discapacidad = Discapacidad::cacheDisc();
+            $institucion = InstitucionesSalud::cacheInstituciones();
+            $orfandad = Orfandad::cacheOrfandad();
+            $grado = GradoEstudio::cacheGrado();
+            $empleo = TipoEmpleo::cacheEmpleo();
+            $actividad = ActividadLaboral::cacheAL();
+            $salario = Salarios::cacheSalarios();
+            $dependientes = DependientesEconomicos::cacheDependientes();
+            $actividad2 = Actividad::cacheActividad();
+            $realizaA = RealizaActividad::cacheRealizaAct();
+            $pering = PerIngresos::cachePerIngresos();
+            $tiempo = Tiempo::cacheTiempo();
+            $casadonde = CasaDondeVive::cacheCasaDonde();
+            $material = MaterialVivienda::cacheMaterial();
+            $servicioAgua= ServicioAgua::cacheServicioAgua();
+            $sandren = Sandren::cacheSandren();
+            $servluz = ServicioLuz::cacheServicioLuz();
+            $combustible = Combustible::cacheCombustible();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $apartado->APARTADO3 = 1;
-            if ($model->save() && $apartado->save()){
-                return $this->redirect(['/familia', 'id' => $model->FOLIO]);
+            if ($model->load(Yii::$app->request->post())) {
+                $apartado->APARTADO3 = 1;
+                if ($model->save() && $apartado->save()){
+                    return $this->redirect(['/familia', 'id' => $model->FOLIO]);
+                }
             }
+
+            return $this->render('update', [
+                'model' => $model,
+                'mun' => $mun,
+                'parentesco' => $parentesco,
+                'lengua' => $lengua,
+                'cantidades' => $cantidades,
+                'radicar' => $radicar,
+                'enfermedad' => $enfermedad,
+                'discapacidad' => $discapacidad,
+                'institucion' => $institucion,
+                'orfandad' => $orfandad,
+                'grado' => $grado,
+                'empleo' => $empleo,
+                'actividad' => $actividad,
+                'salario' => $salario,
+                'dependientes' => $dependientes,
+                'actividad2' => $actividad2,
+                'realizaA' => $realizaA,
+                'pering' => $pering,
+                'tiempo' => $tiempo,
+                'casadonde' => $casadonde,
+                'material' => $material,
+                'servicioAgua' => $servicioAgua,
+                'sandren' => $sandren,
+                'servluz' => $servluz,
+                'combustible' => $combustible,
+                'apartado' => $apartado,
+            ]);
+        }
+        else{
+            throw new \yii\web\NotFoundHttpException('ID INCORRECTO');
         }
 
-        return $this->render('update', [
-            'model' => $model,
-            'mun' => $mun,
-            'parentesco' => $parentesco,
-            'lengua' => $lengua,
-            'cantidades' => $cantidades,
-            'radicar' => $radicar,
-            'enfermedad' => $enfermedad,
-            'discapacidad' => $discapacidad,
-            'institucion' => $institucion,
-            'orfandad' => $orfandad,
-            'grado' => $grado,
-            'empleo' => $empleo,
-            'actividad' => $actividad,
-            'salario' => $salario,
-            'dependientes' => $dependientes,
-            'actividad2' => $actividad2,
-            'realizaA' => $realizaA,
-            'pering' => $pering,
-            'tiempo' => $tiempo,
-            'casadonde' => $casadonde,
-            'material' => $material,
-            'servicioAgua' => $servicioAgua,
-            'sandren' => $sandren,
-            'servluz' => $servluz,
-            'combustible' => $combustible,
-            'apartado' => $apartado,
-        ]);
     }
 
     public function actionDelete($id)
     {
+        die;
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

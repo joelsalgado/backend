@@ -60,10 +60,6 @@ class MetadatoController extends Controller
         ];
     }
 
-    /**
-     * Lists all Metadato models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new MetadatoSearch();
@@ -78,6 +74,7 @@ class MetadatoController extends Controller
 
     public function actionView($id)
     {
+        die;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -286,116 +283,131 @@ class MetadatoController extends Controller
     public function actionUpdate($id,$mun)
     {
         $model = $this->findModel($id);
-        $apartado = Apartados::findOne($id);
+        if ($model){
+            $apartado = Apartados::findOne($id);
+            $loc = Localidad::cacheLocalidad($mun);
+            $ageb = Agebs::cacheAgebs($mun);
+            $sec = Secciones::cacheSecciones($mun);
+            $nac = Nacionalidades::cacheNacionalidades();
+            $doc = Documentos::cacheDocumentosOf();
+            $nacim = EntidadFederativa::cacheEntidadFed();
 
-        $loc = Localidad::cacheLocalidad($mun);
-        $ageb = Agebs::cacheAgebs($mun);
-        $sec = Secciones::cacheSecciones($mun);
-        $nac = Nacionalidades::cacheNacionalidades();
-        $doc = Documentos::cacheDocumentosOf();
-        $nacim = EntidadFederativa::cacheEntidadFed();
+            if ($model->load(Yii::$app->request->post())) {
+                $request = New Request;
 
+                $user = Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post())) {
-            $request = New Request;
+                $ip = $request->getUserIp();
 
-            $user = Yii::$app->user->id;
+                $model->USU = $user.'';
 
-            $ip = $request->getUserIp();
+                $model->IP = $ip;
 
-            $model->USU = $user.'';
+                $model->NOMBRES = trim(strtoupper($model->NOMBRES));
+                $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
+                $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
+                $model->MANZANA = trim(strtoupper($model->MANZANA));
+                $model->LOTE = trim(strtoupper($model->LOTE));
+                $model->CALLE = trim(strtoupper($model->CALLE));
+                $model->NUM_EXT = trim(strtoupper($model->NUM_EXT));
+                $model->NUM_INT = trim(strtoupper($model->NUM_INT));
+                $model->COLONIA = trim(strtoupper($model->COLONIA));
+                $model->ENTRE_CALLE = trim(strtoupper($model->ENTRE_CALLE));
+                $model->Y_CALLE = trim(strtoupper($model->Y_CALLE));
+                $model->OTRA_REFERENCIA = trim(strtoupper($model->OTRA_REFERENCIA));
+                $model->CURP = trim(strtoupper($model->CURP));
+                $model->RFC = trim(strtoupper($model->RFC));
+                $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
 
-            $model->IP = $ip;
+                $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 
-            $model->NOMBRES = trim(strtoupper($model->NOMBRES));
-            $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
-            $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
-            $model->MANZANA = trim(strtoupper($model->MANZANA));
-            $model->LOTE = trim(strtoupper($model->LOTE));
-            $model->CALLE = trim(strtoupper($model->CALLE));
-            $model->NUM_EXT = trim(strtoupper($model->NUM_EXT));
-            $model->NUM_INT = trim(strtoupper($model->NUM_INT));
-            $model->COLONIA = trim(strtoupper($model->COLONIA));
-            $model->ENTRE_CALLE = trim(strtoupper($model->ENTRE_CALLE));
-            $model->Y_CALLE = trim(strtoupper($model->Y_CALLE));
-            $model->OTRA_REFERENCIA = trim(strtoupper($model->OTRA_REFERENCIA));
-            $model->CURP = trim(strtoupper($model->CURP));
-            $model->RFC = trim(strtoupper($model->RFC));
-            $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
-
-            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
-
-            if($model->validate()){
-                if($model->save()) {
-                    return $this->redirect(['/socioeconomico/update', 'id' => $model->FOLIO]);
+                if($model->validate()){
+                    if($model->save()) {
+                        return $this->redirect(['/socioeconomico/update', 'id' => $model->FOLIO]);
+                    }
                 }
+
             }
 
+            return $this->render('update', [
+                'model' => $model,
+                'loc' => $loc,
+                'ageb' => $ageb,
+                'nac' => $nac,
+                'doc' => $doc,
+                'nacim' => $nacim,
+                'mun' => $mun,
+                'sec' => $sec,
+                'apartado' => $apartado
+            ]);
+        }
+        else{
+            throw new \yii\web\NotFoundHttpException('ID INCORRECTO');
         }
 
-        return $this->render('update', [
-            'model' => $model,
-            'loc' => $loc,
-            'ageb' => $ageb,
-            'nac' => $nac,
-            'doc' => $doc,
-            'nacim' => $nacim,
-            'mun' => $mun,
-            'sec' => $sec,
-            'apartado' => $apartado
-        ]);
+
     }
 
     public function actionFolio($id){
 
-        $metadato = Metadato::find()->where(['FOLIO' => $id]);
-        if($metadato){
-            Yii::$app->session->setFlash('success', "Registro Correto tu folio es: ".$id."");
-            $apartado = Apartados::findOne($id);
-            $apartado->APARTADO4 = 1;
-            if ($apartado->save()) {
-                $dataProvider = new ActiveDataProvider([
-                    'query' => $metadato,
-                ]);
 
-                return $this->render('folio', [
-                    'dataProvider' => $dataProvider,
-                ]);
-            }
-
+        $metadato2 = Metadato::findOne($id);
+        if($metadato2){
+            $metadato = Metadato::find()->where(['FOLIO' => $id]);
+                Yii::$app->session->setFlash('success', "Registro Correto tu folio es: ".$id."");
+                $apartado = Apartados::findOne($id);
+                $apartado->APARTADO4 = 1;
+                if ($apartado->save()) {
+                    $dataProvider = new ActiveDataProvider([
+                        'query' => $metadato,
+                    ]);
+                    return $this->render('folio', [
+                        'dataProvider' => $dataProvider,
+                    ]);
+                }
+        }
+        else{
+            throw new \yii\web\NotFoundHttpException('ID INCORRECTO');
         }
     }
 
 
     public function actionReport($id) {
+
         $model = Metadato::findOne($id);
+        if ($model){
+            $generator = new BarcodeGeneratorPNG();
+            $code =  base64_encode($generator->getBarcode($model->FOLIO_RELACIONADO, $generator::TYPE_CODE_128_B));
 
-        $generator = new BarcodeGeneratorPNG();
-        $code =  base64_encode($generator->getBarcode($model->FOLIO_RELACIONADO, $generator::TYPE_CODE_128_B));
+            $content = $this->renderPartial('_reportView', [
+                'model'=> $model,
+                'code' => $code
+            ]);
+            $pdf = new Pdf([
+                'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
+                'format' => Pdf::FORMAT_A4,
+                'destination' => Pdf::DEST_BROWSER,
+                'content' => $content,
+                'options' => [
+                    'title' => 'FUR'
+                ],
+                'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+                'methods' => [
+                    'SetHeader' => ['Secretaria de Desarrollo Social'],
+                    'SetFooter' => ['|Pagina {PAGENO}|'],
+                ]
+            ]);
+            return $pdf->render();
+        }
+        else{
+            throw new \yii\web\NotFoundHttpException('ID INCORRECTO');
+        }
 
-        $content = $this->renderPartial('_reportView', [
-            'model'=> $model,
-            'code' => $code
-        ]);
-        $pdf = new Pdf([
-            'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
-            'format' => Pdf::FORMAT_A4,
-            'destination' => Pdf::DEST_BROWSER,
-            'content' => $content,
-            'options' => [
-                'title' => 'FUR'
-            ],
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            'methods' => [
-                'SetHeader' => ['Secretaria de Desarrollo Social'],
-                'SetFooter' => ['|Pagina {PAGENO}|'],
-            ]
-        ]);
-        return $pdf->render();
     }
 
     public function actionDelete($id)
     {
+        die;
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -405,16 +417,19 @@ class MetadatoController extends Controller
     public function actionMunicipio($id = null)
     {
         $model = Municipio::edomex();
+        $mun = null;
+        $folio = null;
+        $apartado = null;
 
         if($id != null){
             $model2 = Metadato::findOne($id);
-            $apartado = Apartados::findOne($id);
-            $mun = $model2->CVE_MUNICIPIO;
-            $folio = $model2->FOLIO;
-        }else{
-            $mun = null;
-            $folio = null;
-            $apartado = null;
+            if($model2){
+                $apartado = Apartados::findOne($id);
+                $mun = $model2->CVE_MUNICIPIO;
+                $folio = $model2->FOLIO;
+            }else{
+                throw new \yii\web\NotFoundHttpException('ID INCORRECTO');
+            }
         }
 
         if($model) {
