@@ -33,7 +33,10 @@ class Metadato extends \yii\db\ActiveRecord
             [['CORREO_ELECTRONICO', 'CORREO_ELECTRONICO_C'], 'string', 'max' => 60],
             [['FECHA_NACIMIENTO'],'date', 'format'=>'dd/mm/yyyy', 'message' => 'Formato no valido'],
             ['CORREO_ELECTRONICO','email', 'message' => 'Formato de correo incorrecto'],
-            [['PRIMER_APELLIDO','SEGUNDO_APELLIDO', 'NOMBRES'], 'match', 'pattern' => '/^[a-záéíóúñ\s]+$/i', 'message' => 'Sólo se aceptan letras'],
+            [['MANZANA','LOTE', 'CALLE', 'NUM_EXT', 'NUM_INT', 'COLONIA', 'ENTRE_CALLE', 'Y_CALLE', 'OTRA_REFERENCIA',], 'match', 'pattern' => '/^[a-zñ0-9#()\s]+$/i',
+                'message' => 'Sólo se aceptan letras sin acentos y numéros'],
+            [['PRIMER_APELLIDO','SEGUNDO_APELLIDO', 'NOMBRES'], 'match', 'pattern' => '/^[a-zñ\s]+$/i',
+                'message' => 'Sólo se aceptan letras sin acentos'],
             [['TELEFONO','FAX'], 'match', 'pattern' => '/^[0-9+\s]+$/i', 'message' => 'Solo se aceptan números'],
             [['CURP'], 'match', 'pattern' => '/[A-Z]{4}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]/', 'message' => 'Formato no valido'],
             ['CURP', 'match', 'pattern' => '/^.{1,18}$/', 'message' => 'Tiene que tener 18 caracteres'],
@@ -41,8 +44,24 @@ class Metadato extends \yii\db\ActiveRecord
             ['RFC', 'validateRfc'],
             ['FECHA_NACIMIENTO', 'validateFecha'],
             ['FOLIO_ID_OFICIAL', 'validateCVE'],
+            ['CVE_LUGAR_NACIMIENTO', 'validateDuplicados'],
+            [['CURP'], 'unique', 'message' => 'Ya se encuentra un registro con este mismo valor'],
 
         ];
+    }
+
+    public function validateDuplicados(){
+        if ($this->isNewRecord) {
+            $dup = Metadato::find()->where([
+                'NOMBRE_COMPLETO' => $this->NOMBRE_COMPLETO,
+                'FECHA_NACIMIENTO' => $this->FECHA_NACIMIENTO,
+                'CVE_MUNICIPIO' => $this->CVE_MUNICIPIO
+            ])->all();
+            if ($dup) {
+                $this->addError('CVE_LUGAR_NACIMIENTO', 'Este registro ya se encuentra en base de datos');
+            }
+        }
+
     }
 
     public function validateCurp()

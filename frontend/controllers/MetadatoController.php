@@ -136,8 +136,23 @@ class MetadatoController extends Controller
 
             $model->CVE_DEPENDENCIA = $dependencia.'';
 
-            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
+            $model->NOMBRES = trim(strtoupper($model->NOMBRES));
+            $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
+            $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
+            $model->MANZANA = trim(strtoupper($model->MANZANA));
+            $model->LOTE = trim(strtoupper($model->LOTE));
+            $model->CALLE = trim(strtoupper($model->CALLE));
+            $model->NUM_EXT = trim(strtoupper($model->NUM_EXT));
+            $model->NUM_INT = trim(strtoupper($model->NUM_INT));
+            $model->COLONIA = trim(strtoupper($model->COLONIA));
+            $model->ENTRE_CALLE = trim(strtoupper($model->ENTRE_CALLE));
+            $model->Y_CALLE = trim(strtoupper($model->Y_CALLE));
+            $model->OTRA_REFERENCIA = trim(strtoupper($model->OTRA_REFERENCIA));
+            $model->CURP = trim(strtoupper($model->CURP));
+            $model->RFC = trim(strtoupper($model->RFC));
+            $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
 
+            $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 
             $socioeconomico->FOLIO = $id;
 
@@ -291,6 +306,22 @@ class MetadatoController extends Controller
             $model->USU = $user.'';
 
             $model->IP = $ip;
+
+            $model->NOMBRES = trim(strtoupper($model->NOMBRES));
+            $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
+            $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
+            $model->MANZANA = trim(strtoupper($model->MANZANA));
+            $model->LOTE = trim(strtoupper($model->LOTE));
+            $model->CALLE = trim(strtoupper($model->CALLE));
+            $model->NUM_EXT = trim(strtoupper($model->NUM_EXT));
+            $model->NUM_INT = trim(strtoupper($model->NUM_INT));
+            $model->COLONIA = trim(strtoupper($model->COLONIA));
+            $model->ENTRE_CALLE = trim(strtoupper($model->ENTRE_CALLE));
+            $model->Y_CALLE = trim(strtoupper($model->Y_CALLE));
+            $model->OTRA_REFERENCIA = trim(strtoupper($model->OTRA_REFERENCIA));
+            $model->CURP = trim(strtoupper($model->CURP));
+            $model->RFC = trim(strtoupper($model->RFC));
+            $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
 
             $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 

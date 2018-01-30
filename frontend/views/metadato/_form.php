@@ -66,12 +66,14 @@ use yii\helpers\ArrayHelper;
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'MANZANA')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'MANZANA')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'LOTE')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'LOTE')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
@@ -83,26 +85,30 @@ use yii\helpers\ArrayHelper;
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <?= $form->field($model, 'CALLE')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'CALLE')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-2">
                 <div class="form-group">
-                    <?= $form->field($model, 'NUM_EXT')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'NUM_EXT')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
 
             <div class="col-sm-2">
                 <div class="form-group">
-                    <?= $form->field($model, 'NUM_INT')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'NUM_INT')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
 
             <div class="col-sm-8">
                 <div class="form-group">
-                    <?= $form->field($model, 'COLONIA')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'COLONIA')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
@@ -114,17 +120,18 @@ use yii\helpers\ArrayHelper;
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <?= $form->field($model, 'ENTRE_CALLE')->textInput() ?>
+                    <?= $form->field($model, 'ENTRE_CALLE')->textInput(['style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <?= $form->field($model, 'Y_CALLE')->textInput() ?>
+                    <?= $form->field($model, 'Y_CALLE')->textInput(['style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'OTRA_REFERENCIA')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'OTRA_REFERENCIA')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
@@ -136,17 +143,20 @@ use yii\helpers\ArrayHelper;
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'PRIMER_APELLIDO')->textInput(['maxlength' => true, 'style'=>'text-transform:uppercase;']) ?>
+                    <?= $form->field($model, 'PRIMER_APELLIDO')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'SEGUNDO_APELLIDO')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'SEGUNDO_APELLIDO')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
@@ -193,12 +203,14 @@ use yii\helpers\ArrayHelper;
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <?= $form->field($model, 'CURP')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'CURP')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <?= $form->field($model, 'RFC')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'RFC')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
@@ -207,7 +219,7 @@ use yii\helpers\ArrayHelper;
                 <div class="form-group">
                     <?= $form->field($model, 'TP_ID_OFICIAL')->widget(Select2::classname(), [
                         'data' => ArrayHelper::map($doc, 'CVE_DOCUMENTO', 'DESC_DOCUMENTO'),
-                        'options' => ['placeholder' => 'Selecciona una Nacionalidad'],
+                        'options' => ['value' => 2,'placeholder' => 'Selecciona una Nacionalidad'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
@@ -216,7 +228,8 @@ use yii\helpers\ArrayHelper;
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <?= $form->field($model, 'FOLIO_ID_OFICIAL')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'FOLIO_ID_OFICIAL')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;']) ?>
                 </div>
             </div>
         </div>
