@@ -6,8 +6,6 @@ use frontend\widgets\Apartados\Apartados;
 /* @var $model common\models\Metadato */
 
 $this->title = 'Datos Personales';
-$this->params['breadcrumbs'][] = ['label' => 'Solicitantes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="metadato-update">
     <div class="box">
