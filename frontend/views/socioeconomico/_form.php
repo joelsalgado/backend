@@ -103,7 +103,8 @@ use kartik\select2\Select2;
             <div class="DELITO">
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <?= $form->field($model, 'DELITO_CUAL')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'DELITO_CUAL')->textInput(['maxlength' => true,
+                            'style'=>'text-transform:uppercase;']) ?>
                     </div>
                 </div>
             </div>
@@ -129,7 +130,9 @@ use kartik\select2\Select2;
                 <div class="col-sm-4">
                     <div class="form-group">
 
-                        <?= $form->field($model, 'EMBARAZADA_MESES')->textInput() ?>
+                        <?= $form->field($model, 'EMBARAZADA_MESES')->textInput([
+                                'style'=>'text-transform:uppercase;'
+                        ]) ?>
                     </div>
                 </div>
             </div>
@@ -183,7 +186,9 @@ use kartik\select2\Select2;
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'DESC_CCT')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'DESC_CCT')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;'
+                    ]) ?>
                 </div>
             </div>
         </div>
@@ -255,12 +260,16 @@ use kartik\select2\Select2;
                 <div class="INGRESO">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <?= $form->field($model, 'ALGUN_INGRESO_TIPO')->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($model, 'ALGUN_INGRESO_TIPO')->textInput(['maxlength' => true,
+                                'style'=>'text-transform:uppercase;'
+                            ]) ?>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <?= $form->field($model, 'ALGUN_INGRESO_MONTO')->textInput() ?>
+                            <?= $form->field($model, 'ALGUN_INGRESO_MONTO')->textInput([
+                                'style'=>'text-transform:uppercase;'
+                            ]) ?>
                         </div>
                     </div>
                 </div>
@@ -276,7 +285,9 @@ use kartik\select2\Select2;
             <div class="ALQUILER">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <?= $form->field($model, 'ALQUILER_TERRENO_MONTO')->textInput() ?>
+                        <?= $form->field($model, 'ALQUILER_TERRENO_MONTO')->textInput([
+                            'style'=>'text-transform:uppercase;'
+                        ]) ?>
                     </div>
                 </div>
             </div>
@@ -290,7 +301,9 @@ use kartik\select2\Select2;
             <div class="PENSION">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <?= $form->field($model, 'PENSION_MONTO')->textInput() ?>
+                        <?= $form->field($model, 'PENSION_MONTO')->textInput([
+                            'style'=>'text-transform:uppercase;'
+                        ]) ?>
                     </div>
                 </div>
             </div>
@@ -341,12 +354,15 @@ use kartik\select2\Select2;
             <div class="APOYOS">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <?= $form->field($model, 'CUANTOS_APOYOS')->textInput() ?>
+                        <?= $form->field($model, 'CUANTOS_APOYOS')->textInput([
+                            'style'=>'text-transform:uppercase;'
+                        ]) ?>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <?= $form->field($model, 'CUAL_APOYO')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'CUAL_APOYO')->textInput(['maxlength' => true,
+                            'style'=>'text-transform:uppercase;']) ?>
                     </div>
                 </div>
             </div>

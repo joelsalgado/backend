@@ -7,8 +7,6 @@ use frontend\widgets\Apartados\Apartados;
 /* @var $model common\models\Familia */
 
 $this->title = 'Integrantes del Hogar';
-$this->params['breadcrumbs'][] = ['label' => 'Familias', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="familia-create">
 

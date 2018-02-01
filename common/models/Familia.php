@@ -153,6 +153,21 @@ class Familia extends \yii\db\ActiveRecord
         return ['FOLIO_FUR'];
     }
 
+    public function getParentesco()
+    {
+        return $this->hasOne(Parentesco::className(), ['CVE_PARENTESCO' => 'CVE_PARENTESCO']);
+    }
+
+    public function getGradoEstudios()
+    {
+        return $this->hasOne(GradoEstudio::className(), ['CVE_GRADO_ESTUDIOS' => 'CVE_GRADO_ESTUDIOS']);
+    }
+
+    public function getDiscapacidad()
+    {
+        return $this->hasOne(Discapacidad::className(), ['CVE_DISCAPACIDAD' => 'CVE_DISCAPACIDAD']);
+    }
+
     public function beforeSave($insert)
     {
 

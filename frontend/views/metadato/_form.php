@@ -204,7 +204,8 @@ use yii\helpers\ArrayHelper;
             <div class="col-sm-6">
                 <div class="form-group">
                     <?= $form->field($model, 'CURP')->textInput(['maxlength' => true,
-                        'style'=>'text-transform:uppercase;']) ?>
+                        'style'=>'text-transform:uppercase;'
+                    ]) ?>
                 </div>
             </div>
             <div class="col-sm-6">

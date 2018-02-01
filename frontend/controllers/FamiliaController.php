@@ -137,6 +137,11 @@ class FamiliaController extends Controller
 
                 $model->IP = $ip;
 
+                $model->NOMBRES = trim(strtoupper($model->NOMBRES));
+                $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
+                $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
+                $model->CURP = trim(strtoupper($model->CURP));
+                $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
 
                 $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 
@@ -177,8 +182,13 @@ class FamiliaController extends Controller
                 $ip = $request->getUserIp();
 
                 $model->USU = $user.'';
-
                 $model->IP = $ip;
+
+                $model->NOMBRES = trim(strtoupper($model->NOMBRES));
+                $model->PRIMER_APELLIDO = trim(strtoupper($model->PRIMER_APELLIDO));
+                $model->SEGUNDO_APELLIDO = trim(strtoupper($model->SEGUNDO_APELLIDO));
+                $model->CURP = trim(strtoupper($model->CURP));
+                $model->FOLIO_ID_OFICIAL = trim(strtoupper($model->FOLIO_ID_OFICIAL));
 
                 $model->NOMBRE_COMPLETO = $model->PRIMER_APELLIDO.' '.$model->SEGUNDO_APELLIDO. ' '. $model->NOMBRES;
 

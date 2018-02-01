@@ -9,6 +9,7 @@ use common\models\Diario;
 use common\models\Docs;
 use common\models\Documentos;
 use common\models\EntidadFederativa;
+use common\models\Familia;
 use common\models\Localidad;
 use common\models\Municipio;
 use common\models\Nacionalidades;
@@ -376,24 +377,32 @@ class MetadatoController extends Controller
 
         $model = Metadato::findOne($id);
         if ($model){
+            $socEc = Socioeconomico::findOne($id);
+            $familia = Familia::find()->where(['FOLIO' => $id])->all();
             $generator = new BarcodeGeneratorPNG();
             $code =  base64_encode($generator->getBarcode($model->FOLIO_RELACIONADO, $generator::TYPE_CODE_128_B));
 
             $content = $this->renderPartial('_reportView', [
                 'model'=> $model,
-                'code' => $code
+                'code' => $code,
+                'socEc'=> $socEc,
+                'familia'=> $familia,
             ]);
             $pdf = new Pdf([
                 'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
                 'format' => Pdf::FORMAT_A4,
                 'destination' => Pdf::DEST_BROWSER,
                 'content' => $content,
+                'filename' => 'fur'.$model->FOLIO_RELACIONADO,
+                'marginLeft'=> 10,
+                'marginRight'=> 10,
+                'marginTop'=> 10,
+                'marginBottom'=> 13,
                 'options' => [
                     'title' => 'FUR'
                 ],
                 'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
                 'methods' => [
-                    'SetHeader' => ['Secretaria de Desarrollo Social'],
                     'SetFooter' => ['|Pagina {PAGENO}|'],
                 ]
             ]);

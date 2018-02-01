@@ -21,17 +21,23 @@ use yii\helpers\ArrayHelper;
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'PRIMER_APELLIDO')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'PRIMER_APELLIDO')->textInput(['maxlength' => true,
+                            'style'=>'text-transform:uppercase;'
+                        ]) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'SEGUNDO_APELLIDO')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'SEGUNDO_APELLIDO')->textInput(['maxlength' => true,
+                            'style'=>'text-transform:uppercase;'
+                        ]) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'NOMBRES')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;'
+                    ]) ?>
                 </div>
             </div>
         </div>
@@ -112,12 +118,16 @@ use yii\helpers\ArrayHelper;
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'FOLIO_ID_OFICIAL')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'FOLIO_ID_OFICIAL')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;'
+                    ]) ?>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <?= $form->field($model, 'CURP')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'CURP')->textInput(['maxlength' => true,
+                        'style'=>'text-transform:uppercase;'
+                    ]) ?>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -138,6 +148,4 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
         <?php ActiveForm::end(); ?>
-
-
 </div>

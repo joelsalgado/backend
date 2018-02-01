@@ -4,141 +4,18 @@ namespace common\models;
 
 use Yii;
 
-/**
- * This is the model class for table "{{%SEDESEM_150}}".
- *
- * @property double $N_PERIODO
- * @property double $CVE_PROGRAMA
- * @property int $FOLIO
- * @property string $FOLIO_RELACIONADO
- * @property string $ES_JEFA
- * @property double $CVE_PARENTESCO
- * @property string $INDIGENA
- * @property string $HABLA_LENGUA_I
- * @property double $CVE_LENGUA
- * @property double $CVE_CANT
- * @property string $REPATRIADO
- * @property double $CVE_TIEMPO_RADICAR
- * @property string $ES_VICTIMA
- * @property string $DELITO_CUAL
- * @property double $CVE_ENFERMEDAD
- * @property string $EMBARAZADA
- * @property double $EMBARAZADA_MESES
- * @property double $CVE_DISCAPACIDAD
- * @property double $CVE_INST_SALUD
- * @property double $CVE_ORFANDAD
- * @property double $CVE_GRADO_ESTUDIOS
- * @property string $DESC_CCT
- * @property string $TIPO_ZONA
- * @property string $TRABAJA
- * @property double $CVE_TIPO_EMPLEO
- * @property double $CVE_ACTIVIDAD_LABORAL
- * @property double $CVE_SALARIO
- * @property string $ALGUN_INGRESO
- * @property string $ALGUN_INGRESO_TIPO
- * @property double $ALGUN_INGRESO_MONTO
- * @property string $ALQUILER_TERRENO
- * @property double $ALQUILER_TERRENO_MONTO
- * @property string $PENSION
- * @property double $PENSION_MONTO
- * @property double $CVE_SALARIO2
- * @property double $CVE_DEPEN_ECONOM
- * @property double $CVE_PARENTESCO2
- * @property string $RECIBE_APOYO
- * @property double $CUANTOS_APOYOS
- * @property string $CUAL_APOYO
- * @property double $CVE_CANT2
- * @property string $TIPO_ZONA2
- * @property double $CVE_ACTIVIDAD
- * @property double $CVE_REALIZA_ACTIVIDAD
- * @property string $ACTIVIDAD_FUE
- * @property double $CVE_SALARIO3
- * @property string $TIPO_ZONA3
- * @property string $TRABAJA2
- * @property double $CVE_SALARIO4
- * @property string $ESTUDIA
- * @property string $RECIBE_INGRESO
- * @property double $CVE_SALARIO5
- * @property string $BECA
- * @property double $CVE_PER_INGRESO
- * @property double $MONTO_BECA
- * @property double $MONTO_TRANSPORTE
- * @property double $CVE_TIEMPO
- * @property double $CVE_CANT3
- * @property string $COMPARTEN_GASTOS
- * @property string $ADULTO_SINCOMIDA
- * @property string $ADULTO_SINTIOHAMBRE
- * @property string $MENOR_PVA
- * @property string $ADULTO_COMIO
- * @property string $ADULTO_PVA
- * @property string $LIMOSNA
- * @property string $ADULTO_SINCENAR
- * @property string $MENOR_COMIO
- * @property string $ADULTO_COMIOMENOS
- * @property string $MENOR_COMIOMENOS
- * @property string $MENOR_SINTIOHAMBRE
- * @property string $MENOR_MENOSCOMIDA
- * @property string $MENOR_ACOSTARHAMBRE
- * @property double $CVE_CASADONDEVIVE_ES
- * @property double $CVE_MATERIAL
- * @property double $CVE_MATERIAL2
- * @property double $CVE_MATERIAL3
- * @property double $CUARTOS
- * @property double $CUARTOS_DORMIR
- * @property double $CVE_SERVICIO_AGUA
- * @property string $EXCUSADO
- * @property string $SANITARIO
- * @property double $CVE_SERVICIO_SANDREN
- * @property double $CVE_SERVICIO_SANDREN2
- * @property double $CVE_SERVICIO_SANDREN3
- * @property double $CVE_SERVICIO_LUZ
- * @property double $CVE_COMBUSTIBLE
- * @property string $FOGON
- * @property string $LAVADERO
- * @property string $TARJA
- * @property string $REGADERA
- * @property string $TINACO
- * @property string $CISTERNA
- * @property string $PILETA
- * @property string $CALENTADOR_SOLAR
- * @property string $CALENTADOR_GAS
- * @property string $MEDIDOR_LUZ
- * @property string $BOMBA_AGUA
- * @property string $TANQUE_GAS
- * @property string $AIRE_ACOND
- * @property string $CALEFACCION
- * @property double $CVE_CANT4
- * @property double $CVE_CASADONDEVIVE_ES2
- * @property string $AFECTADA
- * @property string $STATUS_1
- * @property string $STATUS_2
- * @property string $FECHA_REG
- * @property string $USU
- * @property string $PW
- * @property string $IP
- * @property string $FECHA_M
- * @property string $USU_M
- * @property string $PW_M
- * @property string $IP_M
- */
 class Socioeconomico extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
     public static function tableName()
     {
         return '{{%SEDESEM_150}}';
     }
 
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            [['N_PERIODO', 'CVE_PROGRAMA', 'CVE_PARENTESCO', 'CVE_LENGUA', 'CVE_CANT', 'CVE_TIEMPO_RADICAR', 'CVE_ENFERMEDAD', 'EMBARAZADA_MESES', 'CVE_DISCAPACIDAD', 'CVE_INST_SALUD', 'CVE_ORFANDAD', 'CVE_GRADO_ESTUDIOS', 'CVE_TIPO_EMPLEO', 'CVE_ACTIVIDAD_LABORAL', 'CVE_SALARIO', 'ALGUN_INGRESO_MONTO', 'ALQUILER_TERRENO_MONTO', 'PENSION_MONTO', 'CVE_SALARIO2', 'CVE_DEPEN_ECONOM', 'CVE_PARENTESCO2', 'CUANTOS_APOYOS', 'CVE_CANT2', 'CVE_ACTIVIDAD', 'CVE_REALIZA_ACTIVIDAD', 'CVE_SALARIO3', 'CVE_SALARIO4', 'CVE_SALARIO5', 'CVE_PER_INGRESO', 'MONTO_BECA', 'MONTO_TRANSPORTE', 'CVE_TIEMPO', 'CVE_CANT3', 'CVE_CASADONDEVIVE_ES', 'CVE_MATERIAL', 'CVE_MATERIAL2', 'CVE_MATERIAL3', 'CUARTOS', 'CUARTOS_DORMIR', 'CVE_SERVICIO_AGUA', 'CVE_SERVICIO_SANDREN', 'CVE_SERVICIO_SANDREN2', 'CVE_SERVICIO_SANDREN3', 'CVE_SERVICIO_LUZ', 'CVE_COMBUSTIBLE', 'CVE_CANT4', 'CVE_CASADONDEVIVE_ES2'], 'number'],
+            [['N_PERIODO', 'CVE_PROGRAMA', 'CVE_PARENTESCO', 'CVE_LENGUA', 'CVE_CANT', 'CVE_TIEMPO_RADICAR', 'CVE_ENFERMEDAD', 'EMBARAZADA_MESES', 'CVE_DISCAPACIDAD', 'CVE_INST_SALUD', 'CVE_ORFANDAD', 'CVE_GRADO_ESTUDIOS', 'CVE_TIPO_EMPLEO', 'CVE_ACTIVIDAD_LABORAL', 'CVE_SALARIO', 'ALGUN_INGRESO_MONTO', 'ALQUILER_TERRENO_MONTO', 'PENSION_MONTO', 'CVE_SALARIO2', 'CVE_DEPEN_ECONOM', 'CVE_PARENTESCO2', 'CUANTOS_APOYOS', 'CVE_CANT2', 'CVE_ACTIVIDAD', 'CVE_REALIZA_ACTIVIDAD', 'CVE_SALARIO3', 'CVE_SALARIO4', 'CVE_SALARIO5', 'CVE_PER_INGRESO', 'MONTO_BECA', 'MONTO_TRANSPORTE', 'CVE_TIEMPO', 'CVE_CANT3', 'CVE_CASADONDEVIVE_ES', 'CVE_MATERIAL', 'CVE_MATERIAL2', 'CVE_MATERIAL3', 'CUARTOS', 'CUARTOS_DORMIR', 'CVE_SERVICIO_AGUA', 'CVE_SERVICIO_SANDREN', 'CVE_SERVICIO_SANDREN2', 'CVE_SERVICIO_SANDREN3', 'CVE_SERVICIO_LUZ', 'CVE_COMBUSTIBLE', 'CVE_CANT4', 'CVE_CASADONDEVIVE_ES2'], 'number', 'message'=> 'Deber ser numerico'],
             [['FOLIO'], 'integer'],
             [['FECHA_REG', 'FECHA_M'], 'string'],
             [['FOLIO_RELACIONADO'], 'string', 'max' => 16],
@@ -243,7 +120,7 @@ class Socioeconomico extends \yii\db\ActiveRecord
             'CVE_SERVICIO_SANDREN' => 'El servicio sanitario...',
             'CVE_SERVICIO_SANDREN2' => '¿Cuántos baños tiene esta vivienda? ',
             'CVE_SERVICIO_SANDREN3' => 'Esta vivienda tiene drenaje o desagüe conectado a ...',
-            'CVE_SERVICIO_LUZ' => 'En esta vivienda la luz eléctrica la obtienen...z',
+            'CVE_SERVICIO_LUZ' => 'En esta vivienda la luz eléctrica la obtienen...',
             'CVE_COMBUSTIBLE' => 'El combustible que más usan para cocinar es...',
 
             'FOGON' => '¿La estufa (fogón) de leña o carbón con la que cocinan tiene chimenea o algún ducto para sacar el humo de esta vivienda?',
@@ -259,7 +136,7 @@ class Socioeconomico extends \yii\db\ActiveRecord
             'MEDIDOR_LUZ' => 'Medidor  Luz',
             'BOMBA_AGUA' => 'Bomba  Agua',
             'TANQUE_GAS' => 'Tanque  Gas',
-            'AIRE_ACOND' => 'Aire  Acond',
+            'AIRE_ACOND' => 'Aire  Acondicionado',
             'CALEFACCION' => 'Calefaccion',
 
             'CVE_CANT4' => '¿Cuantos integrantes de su hogar comparten cuarto dormitorio? (sin contar pasillos',
@@ -277,6 +154,186 @@ class Socioeconomico extends \yii\db\ActiveRecord
             'PW_M' => 'Pw  M',
             'IP_M' => 'Ip  M',
         ];
+    }
+
+    public function getParentesco()
+    {
+        return $this->hasOne(Parentesco::className(), ['CVE_PARENTESCO' => 'CVE_PARENTESCO']);
+    }
+
+    public function getParentesco2()
+    {
+        return $this->hasOne(Parentesco::className(), ['CVE_PARENTESCO' => 'CVE_PARENTESCO2']);
+    }
+
+    public function getLengua()
+    {
+        return $this->hasOne(Lenguas::className(), ['CVE_LENGUA' => 'CVE_LENGUA']);
+    }
+
+    public function getCantidad()
+    {
+        return $this->hasOne(Cantidades::className(), ['CVE_CANT' => 'CVE_CANT']);
+    }
+
+    public function getCantidad2()
+    {
+        return $this->hasOne(Cantidades::className(), ['CVE_CANT' => 'CVE_CANT2']);
+    }
+
+    public function getCantidad3()
+    {
+        return $this->hasOne(Cantidades::className(), ['CVE_CANT' => 'CVE_CANT3']);
+    }
+
+    public function getCantidad4()
+    {
+        return $this->hasOne(Cantidades::className(), ['CVE_CANT' => 'CVE_CANT4']);
+    }
+
+    public function getRadicar()
+    {
+        return $this->hasOne(TiempoRadicar::className(), ['CVE_TIEMPO_RADICAR' => 'CVE_TIEMPO_RADICAR']);
+    }
+
+    public function getEnfermedad()
+    {
+        return $this->hasOne(Enfermedades::className(), ['CVE_ENFERMEDAD' => 'CVE_ENFERMEDAD']);
+    }
+
+    public function getDiscapacidad()
+    {
+        return $this->hasOne(Discapacidad::className(), ['CVE_DISCAPACIDAD' => 'CVE_DISCAPACIDAD']);
+    }
+
+    public function getInstitucionSalud()
+    {
+        return $this->hasOne(InstitucionesSalud::className(), ['CVE_INST_SALUD' => 'CVE_INST_SALUD']);
+    }
+
+    public function getOrfandad()
+    {
+        return $this->hasOne(Orfandad::className(), ['CVE_ORFANDAD' => 'CVE_ORFANDAD']);
+    }
+
+    public function getGradoEstudios()
+    {
+        return $this->hasOne(GradoEstudio::className(), ['CVE_GRADO_ESTUDIOS' => 'CVE_GRADO_ESTUDIOS']);
+    }
+
+    public function getTipoEmpleo()
+    {
+        return $this->hasOne(TipoEmpleo::className(), ['CVE_TIPO_EMPLEO' => 'CVE_TIPO_EMPLEO']);
+    }
+
+    public function getActividadLaboral()
+    {
+        return $this->hasOne(ActividadLaboral::className(), ['CVE_ACTIVIDAD_LABORAL' => 'CVE_ACTIVIDAD_LABORAL']);
+    }
+
+    public function getSalario()
+    {
+        return $this->hasOne(Salarios::className(), ['CVE_SALARIO' => 'CVE_SALARIO']);
+    }
+
+    public function getSalario2()
+    {
+        return $this->hasOne(Salarios::className(), ['CVE_SALARIO' => 'CVE_SALARIO2']);
+    }
+
+    public function getSalario3()
+    {
+        return $this->hasOne(Salarios::className(), ['CVE_SALARIO' => 'CVE_SALARIO3']);
+    }
+
+    public function getSalario4()
+    {
+        return $this->hasOne(Salarios::className(), ['CVE_SALARIO' => 'CVE_SALARIO4']);
+    }
+
+    public function getSalario5()
+    {
+        return $this->hasOne(Salarios::className(), ['CVE_SALARIO' => 'CVE_SALARIO5']);
+    }
+
+    public function getDependientes()
+    {
+        return $this->hasOne(DependientesEconomicos::className(), ['CVE_DEPEN_ECONOM' => 'CVE_DEPEN_ECONOM']);
+    }
+
+    public function getActividad()
+    {
+        return $this->hasOne(Actividad::className(), ['CVE_ACTIVIDAD' => 'CVE_ACTIVIDAD']);
+    }
+
+    public function getRealizaActividad()
+    {
+        return $this->hasOne(RealizaActividad::className(), ['CVE_REALIZA_ACTIVIDAD' => 'CVE_REALIZA_ACTIVIDAD']);
+    }
+
+    public function getPerIngreso()
+    {
+        return $this->hasOne(PerIngresos::className(), ['CVE_PER_INGRESO' => 'CVE_PER_INGRESO']);
+    }
+
+    public function getTiempo()
+    {
+        return $this->hasOne(Tiempo::className(), ['CVE_TIEMPO' => 'CVE_TIEMPO']);
+    }
+
+    public function getCasaVive()
+    {
+        return $this->hasOne(CasaDondeVive::className(), ['CVE_CASADONDEVIVE_ES' => 'CVE_CASADONDEVIVE_ES']);
+    }
+
+    public function getCasaVive2()
+    {
+        return $this->hasOne(CasaDondeVive::className(), ['CVE_CASADONDEVIVE_ES' => 'CVE_CASADONDEVIVE_ES2']);
+    }
+
+    public function getMaterialVivienda()
+    {
+        return $this->hasOne(MaterialVivienda::className(), ['CVE_MATERIAL' => 'CVE_MATERIAL']);
+    }
+
+    public function getMaterialVivienda2()
+    {
+        return $this->hasOne(MaterialVivienda::className(), ['CVE_MATERIAL' => 'CVE_MATERIAL2']);
+    }
+
+    public function getMaterialVivienda3()
+    {
+        return $this->hasOne(MaterialVivienda::className(), ['CVE_MATERIAL' => 'CVE_MATERIAL3']);
+    }
+
+    public function getServicioAgua()
+    {
+        return $this->hasOne(ServicioAgua::className(), ['CVE_SERVICIO' => 'CVE_SERVICIO_AGUA']);
+    }
+
+    public function getSandren()
+    {
+        return $this->hasOne(Sandren::className(), ['CVE_SERVICIO_SANDREN' => 'CVE_SERVICIO_SANDREN']);
+    }
+
+    public function getSandren2()
+    {
+        return $this->hasOne(Sandren::className(), ['CVE_SERVICIO_SANDREN' => 'CVE_SERVICIO_SANDREN2']);
+    }
+
+    public function getSandren3()
+    {
+        return $this->hasOne(Sandren::className(), ['CVE_SERVICIO_SANDREN' => 'CVE_SERVICIO_SANDREN3']);
+    }
+
+    public function getServicioLuz()
+    {
+        return $this->hasOne(ServicioLuz::className(), ['CVE_SERVICIO_LUZ' => 'CVE_SERVICIO_LUZ']);
+    }
+
+    public function getCombustible()
+    {
+        return $this->hasOne(Combustible::className(), ['CVE_COMBUSTIBLE' => 'CVE_COMBUSTIBLE']);
     }
 
     public static function primaryKey()
