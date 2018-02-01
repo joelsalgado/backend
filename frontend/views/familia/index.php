@@ -96,11 +96,11 @@ $this->title = 'Integrantes del Hogar ';
                         ],
                         'urlCreator' => function ($action, $model, $key, $index) {
                             if ($action === 'update') {
-                                $url ='/familia/update?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
+                                $url =Yii::$app->homeUrl.'familia/update?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
                                 return $url;
                             }
                             if ($action === 'borrar') {
-                                $url ='/familia/delete?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
+                                $url =Yii::$app->homeUrl.'familia/delete?id='.$model->FOLIO.'&folio='.$model->FOLIO_FUR;
                                 return $url;
                             }
                         }
