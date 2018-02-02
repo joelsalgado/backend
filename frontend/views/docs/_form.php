@@ -51,20 +51,8 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'DOCTO_4')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'DOCTO_5')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DOCTO_6')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DOCTO_7')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DOCTO_8')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DOCTO_9')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DOCTO_10')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

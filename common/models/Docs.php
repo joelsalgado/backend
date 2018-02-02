@@ -69,6 +69,7 @@ class Docs extends \yii\db\ActiveRecord
                 'image',
                 'extensions' => ['jpg'],
                 'mimeTypes' => ['image/jpeg',],
+                'maxSize'=>20*1024*1024,
             ],
         ];
     }
@@ -84,6 +85,7 @@ class Docs extends \yii\db\ActiveRecord
             'FOLIO' => 'Folio',
             'FOLIO_RELACIONADO' => 'Folio  Relacionado',
             'imageTemp' => 'Acta de naciemito (Tamaño recomendado 100 kb)',
+            'imageTemp2' => 'CURP (Tamaño recomendado 100 kb)',
             'DOCTO_1' => 'Docto 1',
             'DOCTO_2' => 'Docto 2',
             'DOCTO_3' => 'Docto 3',

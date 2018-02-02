@@ -7,6 +7,7 @@ use common\models\Agebs;
 use common\models\Documentos;
 use common\models\EntidadFederativa;
 use common\models\Localidad;
+use common\models\Map;
 use common\models\Metadato;
 use common\models\Municipio;
 use common\models\Nacionalidades;
@@ -123,11 +124,22 @@ class ApiController extends ActiveController
         }
     }
 
+    public function actionMapa(){
+        $map = Map::find()
+            ->orderBy(['CVE_MUN' => 'DESC'])
+            ->all();
+        if($map) {
+            return array('status' => true, 'data'=> $map);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
+
 
     public function actionCreate(){
         $data = Yii::$app->request->post();
 
-        var_dump($data['last_name']); die;
+       echo $data['last_name']; die;
 
         if (!is_null($user)) {
             return array('status' => true, 'data'=> $user);

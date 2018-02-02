@@ -24,10 +24,12 @@ class Apartados extends Widget
     public $a2;
     public $a3;
     public $a4;
+    public $a5;
     public $url1 = '';
     public $url2 = '';
     public $url3 = '';
     public $url4 = '';
+    public $url5 = '';
 
     public function init()
     {
@@ -38,6 +40,7 @@ class Apartados extends Widget
             $this->a2 = $mal;
             $this->a3 = $mal;
             $this->a4 = $mal;
+            $this->a5 = $mal;
         }
 
         if($this->tipo == 2 && $this->accion = 'c'){
@@ -45,6 +48,7 @@ class Apartados extends Widget
             $this->url1 = ['metadato/municipio'];
             $this->a3 = $mal;
             $this->a4 = $mal;
+            $this->a5 = $mal;
         }
 
 
@@ -53,11 +57,13 @@ class Apartados extends Widget
             $this->a2 = ($this->apartado->APARTADO2 == 1) ? $bien : $mal;
             $this->a3 = ($this->apartado->APARTADO3 == 1) ? $bien : $mal;
             $this->a4 = ($this->apartado->APARTADO4 == 1) ? $bien : $mal;
+            $this->a5 = ($this->apartado->APARTADO5 == 1) ? $bien : $mal;
 
             $this->url1 = ($this->apartado->APARTADO2 == 1) ? ['/metadato/municipio', 'id' => $this->id]: '';
             $this->url2 = ($this->apartado->APARTADO2 == 1) ? ['/metadato/update', 'id' => $this->id, 'mun' => $this->mun]: '';
             $this->url3 = ($this->apartado->APARTADO3 == 1) ? ['/socioeconomico/update', 'id' => $this->id]: '';
             $this->url4 = ($this->apartado->APARTADO4 == 1) ? ['/familia', 'id' => $this->id]: '';
+            $this->url5 = ($this->apartado->APARTADO5 == 1) ? ['/docs/update', 'id' => $this->id]: '';
 
         }
 
@@ -78,10 +84,12 @@ class Apartados extends Widget
             'a2' => $this->a2,
             'a3' => $this->a3,
             'a4' => $this->a4,
+            'a5' => $this->a5,
             'url1' => $this->url1,
             'url2' => $this->url2,
             'url3' => $this->url3,
             'url4' => $this->url4,
+            'url5' => $this->url5,
 
         ]);
     }

@@ -11,5 +11,6 @@ return [
     'apartado2' => 'Datos Personales',
     'apartado3' => 'Datos operativos del programa',
     'apartado4' => 'Datos Sociodemográficos',
+    'apartado5' => 'Documentos',
 
 ];

@@ -30,7 +30,7 @@ $this->title = 'Integrantes del Hogar ';
             <p>
                 <?= Html::a('Agregar integrante', ['create', 'id'=>$id], ['class' => 'btn btn-success']) ?>
                 <?php if ($boton == 'true'){ ?>
-                <?= Html::a('FINALIZAR REGISTRO', ['/metadato/folio', 'id'=>$id], ['class' => 'btn btn-danger']) ?>
+                <?= Html::a('SUBIR DOCUMENTOS', ['/docs/update', 'id'=>$id], ['class' => 'btn btn-danger']) ?>
                 <?php } ?>
             </p>
 

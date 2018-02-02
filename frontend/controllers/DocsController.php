@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Metadato;
+use common\models\Apartados;
 use Yii;
 use common\models\Docs;
 use yii\data\ActiveDataProvider;
@@ -58,21 +59,28 @@ class DocsController extends Controller
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $model2 = Metadato::findOne($id);
-        $mun = $model2->CVE_MUNICIPIO;
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->DOCTO_1 = $this->loadImage('DOCTO_1', 'imageTemp', $model, 'ACTA');
-            $model->DOCTO_2 = $this->loadImage('DOCTO_2', 'imageTemp2', $model, 'CURP');
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->FOLIO]);
+        $model2 = Metadato::findOne($id);
+        if($model2){
+            $model = $this->findModel($id);
+            $mun = $model2->CVE_MUNICIPIO;
+            $apartados = Apartados::findOne($id);
+
+            if ($model->load(Yii::$app->request->post()) ) {
+                $model->DOCTO_1 = $this->loadImage('DOCTO_1', 'imageTemp', $model, 'ACTA');
+                $model->DOCTO_2 = $this->loadImage('DOCTO_2', 'imageTemp2', $model, 'CURP');
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->FOLIO]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                'mun' => $mun,
+                'apartados' => $apartados,
+
+            ]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-            'mun' => $mun
-        ]);
     }
 
     public function actionDelete($id)

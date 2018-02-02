@@ -25,4 +25,8 @@ use yii\helpers\Html;
             '<i class="fa fa-users" aria-hidden="true"></i> '.Yii::$app->params['apartado4'].
             $class4Tipo4 = ($tipo == 4) ? $regular: $a4,$url4)?>
     </li>
+    <li <?= $class5Tipo = ($tipo == 5) ? 'class="active"': '' ?>> <?= Html::a(
+            '<i class="fa fa-file" aria-hidden="true"></i> '.Yii::$app->params['apartado5'].
+            $class4Tipo5 = ($tipo == 5) ? $regular: $a5,$url5)?>
+    </li>
 </ul>
