@@ -18,6 +18,12 @@ $this->title = 'Documentos';
             'mun' => $mun
         ])
         ?>
+        <hr>
+        <p>
+
+                <?= Html::a('FINALIZAR REGISTRO', ['/metadato/folio', 'id'=>$model->FOLIO], ['class' => 'btn btn-danger']) ?>
+
+        </p>
         <div class="box-header with-border">
             <h3 class="box-title">Subir Docunentos</h3>
         </div>

@@ -7,6 +7,7 @@ use common\models\Metadato;
 use Yii;
 use common\models\Familia;
 use yii\data\ActiveDataProvider;
+use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -42,8 +43,13 @@ class FamiliaController extends Controller
 
     public function actionIndex($id)
     {
-        $model2 = Metadato::findOne($id);
-        if($model2){
+        try{
+            $model2 = Metadato::findOne($id);
+        }
+        catch (Exception $exception){
+            $model2 = null;
+        }
+            if($model2){
             $apartados = Apartados::findOne($id);
             $mun = $model2->CVE_MUNICIPIO;
             $query = Familia::find()

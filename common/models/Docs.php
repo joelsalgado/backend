@@ -7,43 +7,15 @@ use yii\imagine\Image;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
-/**
- * This is the model class for table "FURWEB_CONTROL_DOCTOS_150".
- *
- * @property double $N_PERIODO
- * @property double $CVE_PROGRAMA
- * @property int $FOLIO
- * @property string $FOLIO_RELACIONADO
- * @property string $DOCTO_1
- * @property string $DOCTO_2
- * @property string $DOCTO_3
- * @property string $DOCTO_4
- * @property string $DOCTO_5
- * @property string $DOCTO_6
- * @property string $DOCTO_7
- * @property string $DOCTO_8
- * @property string $DOCTO_9
- * @property string $DOCTO_10
- * @property string $REVISO
- * @property string $AUTORIZO
- * @property string $SUPERVISO
- * @property string $OBS_1
- * @property string $OBS_2
- * @property string $FECHA_REG
- * @property string $USU
- * @property string $PW
- * @property string $IP
- * @property string $FECHA_M
- * @property string $USU_M
- * @property string $PW_M
- * @property string $IP_M
- */
 class Docs extends \yii\db\ActiveRecord
 {
 
     public $imageTemp;
     public $imageTemp2;
+    public $imageTemp3;
+    public $imageTemp4;
     public static function tableName()
     {
         return 'FURWEB_CONTROL_DOCTOS_150';
@@ -65,11 +37,11 @@ class Docs extends \yii\db\ActiveRecord
             [['OBS_1', 'OBS_2'], 'string', 'max' => 300],
             [['USU', 'PW', 'IP', 'USU_M', 'PW_M', 'IP_M'], 'string', 'max' => 80],
             [
-                ['imageTemp', 'imageTemp2'],
-                'image',
-                'extensions' => ['jpg'],
-                'mimeTypes' => ['image/jpeg',],
-                'maxSize'=>20*1024*1024,
+                ['imageTemp', 'imageTemp2', 'imageTemp3', 'imageTemp4'],
+                'file',
+                'extensions' => ['jpg', 'pdf'],
+                //'mimeTypes' => ['image/jpeg',],
+                //'maxSize'=>1024*240,
             ],
         ];
     }
@@ -84,8 +56,10 @@ class Docs extends \yii\db\ActiveRecord
             'CVE_PROGRAMA' => 'Cve  Programa',
             'FOLIO' => 'Folio',
             'FOLIO_RELACIONADO' => 'Folio  Relacionado',
-            'imageTemp' => 'Acta de naciemito (Tamaño recomendado 100 kb)',
-            'imageTemp2' => 'CURP (Tamaño recomendado 100 kb)',
+            'imageTemp' => 'Documento 1',
+            'imageTemp2' => 'Documento 2',
+            'imageTemp3' => 'Documento 3',
+            'imageTemp4' => 'Documento 4',
             'DOCTO_1' => 'Docto 1',
             'DOCTO_2' => 'Docto 2',
             'DOCTO_3' => 'Docto 3',
@@ -113,16 +87,16 @@ class Docs extends \yii\db\ActiveRecord
     }
 
 
-    public function  saveImage($imageFile, $name, $type, $tipo) {
+        public function  saveImage($imageFile, $name, $type, $tipo) {
+        if ($type == 'imageTemp' || $type == 'imageTemp2' || $type == 'imageTemp3' || $type == 'imageTemp4'  ) {
 
-        $image = Image::getImagine()->open($imageFile->tempName);
+            $image = Image::getImagine()->open($imageFile->tempName);
+            FileHelper::createDirectory(Yii::getAlias('@images').'/docs/'.$tipo);
 
-        if ($type == 'imageTemp' || $type == 'imageTemp2' ) {
-            FileHelper::createDirectory(Yii::getAlias('@images').'/'.$tipo);
-
-            $cropSizeThumb = new Box(360, 640);
+            $cropSizeThumb = new Box(440, 640);
             $image->resize($cropSizeThumb)
-                ->save(Yii::getAlias('@images').'/'.$tipo.'/'.$name, ['quality' => 70]);
-        }
+                ->save(Yii::getAlias('@images').'/docs/'.$tipo.'/'.$name, ['quality' => 70]);
+            }
+
     }
 }

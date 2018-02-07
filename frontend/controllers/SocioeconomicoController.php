@@ -30,6 +30,7 @@ use common\models\TipoEmpleo;
 use Yii;
 use common\models\Socioeconomico;
 use yii\data\ActiveDataProvider;
+use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -164,7 +165,12 @@ class SocioeconomicoController extends Controller
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        try{
+            $model = $this->findModel($id);
+        }
+        catch (Exception $exception){
+            $model = null;
+        }
         if ($model){
             $model2 = Metadato::findOne($id);
             $mun = $model2->CVE_MUNICIPIO;
