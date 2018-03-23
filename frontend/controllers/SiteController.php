@@ -5,6 +5,7 @@ use common\models\Periodos;
 use common\models\Usuarios;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\data\ArrayDataProvider;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -75,7 +76,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $count = "SELECT * FROM MUN1";
+        $val = Yii::$app->db->createCommand($count)->queryAll();
+
+        //var_dump($val); die;
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $val,
+            'pagination' => [
+                'pageSize' => 126,
+            ],
+        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 
     /**

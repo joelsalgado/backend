@@ -52,7 +52,7 @@ class Secciones extends \yii\db\ActiveRecord
         if(Yii::$app->cache->get($cacheName)) {
             return Yii::$app->cache->get($cacheName);
         } else {
-            return new NotFoundHttpException();
+            return null;
         }
     }
 }

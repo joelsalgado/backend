@@ -10,6 +10,19 @@ $this->title = 'FUR';
                 <h1><?= Yii::$app->params['nomprog'] ?></h1>
                 <?= Html::a('Empezar', ['/metadato/municipio'], ['class' => 'btn btn-lg btn-success']) ?>
             </div>
+            <?=
+            \yii\grid\GridView::widget([
+                'dataProvider' => $dataProvider,
+                'summary' => "Mostrando {begin}-{end} de {totalCount} Elementos",
+                'emptyText' => "No se encontró ningún elemento",
+                'columns' =>
+                    [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'MUNICIPIONOMBRE',
+                        'TOTAL',
+
+                    ]
+            ]);?>
         </div>
     </div>
 </div>
